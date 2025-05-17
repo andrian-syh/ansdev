@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body> 
     <header>
@@ -249,6 +250,7 @@
                         <input type="text" name="name" placeholder="Your Name" required>
                         <input type="email" name="email" placeholder="Your Email" required>
                         <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                        <div class="g-recaptcha" data-sitekey="6LdhyD0rAAAAACE2GV-TaBt8Dzjvv98VF11hGasj" style="margin-bottom: 15px;"></div>
                         <button type="submit" class="btn btn-primary">Send Message</button>
                         <p id="form-status" class="form-status-message"></p>
                     </form>

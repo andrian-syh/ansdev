@@ -121,32 +121,60 @@ document.addEventListener('DOMContentLoaded', () => {
     const formStatus = document.getElementById('form-status');
     async function handleSubmit(event) {
         event.preventDefault();
+
+        const recaptchaResponse = grecaptcha.getResponse();
+        if (recaptchaResponse.length === 0) {
+            formStatus.style.display = 'block';
+            formStatus.textContent = "Please complete the reCAPTCHA.";
+            formStatus.className = 'form-status-message error';
+            grecaptcha.reset(); 
+            return;
+        }
+
         const data = new FormData(event.target);
+        formStatus.style.display = 'block';
+        formStatus.textContent = "Sending your message...";
+        formStatus.className = 'form-status-message info'; // Buat class .info jika perlu
+
         fetch(event.target.action, {
-            method: form.method, body: data, headers: {'Accept': 'application/json'}
+         method: form.method,
+         body: data,
+         headers: {
+             'Accept': 'application/json'
+         }
         }).then(response => {
             formStatus.style.display = 'block'; 
             if (response.ok) {
                 formStatus.textContent = "Thanks for your message! I'll get back to you soon.";
                 formStatus.className = 'form-status-message success';
                 form.reset();
+                grecaptcha.reset(); // Reset reCAPTCHA setelah berhasil kirim
             } else {
                 response.json().then(data => {
                     if (Object.hasOwn(data, 'errors')) {
-                        formStatus.textContent = data["errors"].map(error => error["message"]).join(", ");
+                     // Cek apakah ada error spesifik reCAPTCHA dari Formspree
+                        const recaptchaError = data.errors.find(err => err.field === 'g-recaptcha-response');
+                        if (recaptchaError) {
+                            formStatus.textContent = "reCAPTCHA verification failed. Please try again.";
+                        } else {
+                            formStatus.textContent = data.errors.map(error => error.message).join(", ");
+                        }
                     } else {
                         formStatus.textContent = "Oops! There was a problem submitting your form.";
                     }
                     formStatus.className = 'form-status-message error';
+                    grecaptcha.reset(); // Reset reCAPTCHA jika ada error
                 }).catch(() => { 
                     formStatus.textContent = "Oops! There was a problem submitting your form. Invalid response from server.";
                     formStatus.className = 'form-status-message error';
+                    grecaptcha.reset();
                 });
             }
         }).catch(error => {
             formStatus.style.display = 'block'; 
             formStatus.textContent = "Oops! There was a problem submitting your form. Network error.";
             formStatus.className = 'form-status-message error';
+            grecaptcha.reset();
         });
     }
     if (form) { form.addEventListener("submit", handleSubmit); }

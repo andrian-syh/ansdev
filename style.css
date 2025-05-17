@@ -561,6 +561,11 @@ body:not(.dark-theme) .portfolio-filter-select {
 }
 .form-status-message.success { background-color: rgba(var(--primary-color-rgb), 0.2); color: var(--primary-color); }
 .form-status-message.error { background-color: #ffdddd; color: #d8000c; }
+.form-status-message.info {
+    background-color: #e7f3fe;
+    color: #0c5460;
+    border: 1px solid #b8daff;
+}
 body.dark-theme .form-status-message.error { background-color: #58181F; color: #FFBDBD; }
 
 .contact-socials { text-align: center; margin-top: 40px; }
@@ -570,6 +575,18 @@ body.dark-theme .form-status-message.error { background-color: #58181F; color: #
     transition: color 0.3s ease, transform 0.3s ease; opacity: 0.7;
 }
 .contact-socials a:hover { color: var(--primary-color); transform: scale(1.1); opacity: 1; }
+
+.contact-form .g-recaptcha {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+body.dark-theme .form-status-message.info {
+    background-color: #1c3d5a; 
+    color: #a0d3e8;
+    border: 1px solid #2a5270;
+}
 
 /* Footer */
 footer {
