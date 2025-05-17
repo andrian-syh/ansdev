@@ -279,5 +279,129 @@ document.addEventListener('DOMContentLoaded', () => {
                 displayItems();
             });
         }
-     }
+    }
+
+    // Hero Stats Counter Animation
+    const statItems = document.querySelectorAll('.hero-stats .stat-item h3');
+
+    function formatNumberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function animateValue(element, start, end, duration, suffix = '', prefix = '') {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            let currentValue = Math.floor(progress * (end - start) + start);
+         
+            element.textContent = prefix + formatNumberWithCommas(currentValue) + suffix;
+
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            } else {
+                element.textContent = prefix + formatNumberWithCommas(end) + suffix;
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+ 
+    function parseStatValue(valueString) {
+        let numericValue = 0;
+        let suffix = '';
+        let prefix = '';
+
+        if (valueString.endsWith('%')) {
+            numericValue = Math.min(parseFloat(valueString.replace('%', '')), 100);
+            suffix = '%';
+        } else if (valueString.endsWith('B+')) {
+            numericValue = parseFloat(valueString.replace('B+', ''));
+            suffix = 'B+';
+        } else if (valueString.endsWith('M+')) {
+            numericValue = parseFloat(valueString.replace('M+', ''));
+            suffix = 'M+';
+        } else if (valueString.endsWith('K+')) {
+            numericValue = parseFloat(valueString.replace('K+', ''));
+            suffix = 'K+';
+        } else if (valueString.endsWith('+')) {
+            numericValue = parseFloat(valueString.replace('+', ''));
+            suffix = '+';
+        } else {
+            numericValue = parseFloat(valueString);
+            suffix = '';
+        }
+        return { numericValue, suffix, prefix };
+    }
+
+
+    const animateStat = (element) => {
+        const targetValueString = element.dataset.targetValue || element.textContent;
+        element.dataset.targetValue = targetValueString;
+
+        const { numericValue, suffix, prefix: initialPrefix } = parseStatValue(targetValueString);
+        let duration = 1000;
+
+        if (suffix === 'K+' || suffix === 'M+' || suffix === 'B+') {
+            let currentAnimatedValue = 0;
+            let stages = [];
+
+            if (suffix === 'K+') {
+                stages.push({ end: numericValue, suffixInternal: 'K+', durationPart: duration });
+            } else if (suffix === 'M+') {
+                if (numericValue > 0 || targetValueString.startsWith("0M+")) {
+                    if (numericValue > 0) stages.push({ end: 999, suffixInternal: 'K+', durationPart: 700 });
+             }
+                stages.push({ end: numericValue, suffixInternal: 'M+', durationPart: duration });
+            } else if (suffix === 'B+') {
+                if (numericValue > 0 || targetValueString.startsWith("0B+")) {
+                    if (numericValue > 0) stages.push({ end: 999, suffixInternal: 'K+', durationPart: 500 });
+                    if (numericValue > 0) stages.push({ end: 999, suffixInternal: 'M+', durationPart: 700 });
+                }
+                stages.push({ end: numericValue, suffixInternal: 'B+', durationPart: duration });
+            }
+         
+            let stageIndex = 0;
+            function runStage() {
+                if (stageIndex < stages.length) {
+                    const stage = stages[stageIndex];
+                    let startVal = 0;
+                    if (stageIndex > 0 && stages[stageIndex-1].suffixInternal !== stage.suffixInternal) {
+                        startVal = (stage.suffixInternal === 'K+' && stages[stageIndex-1].suffixInternal === '') ? 0 : 1;
+                        if (stage.end === 0 && (stage.suffixInternal === 'M+' || stage.suffixInternal === 'B+')) startVal = 0;
+                    } else if (stageIndex > 0) {
+                        startVal = stages[stageIndex-1].end;
+                    }
+                 
+                    animateValue(element, startVal, stage.end, stage.durationPart, stage.suffixInternal, initialPrefix);
+                    setTimeout(() => {
+                        stageIndex++;
+                        runStage();
+                    }, stage.durationPart + 25);
+                }
+            }
+            runStage();
+
+        } else {
+            animateValue(element, 0, numericValue, duration, suffix, initialPrefix);
+        }
+    };
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries, observerInstance) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateStat(entry.target);
+                observerInstance.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    statItems.forEach(item => {
+        observer.observe(item);
+    });
 });

@@ -48,7 +48,6 @@
     --border-radius: 8px;
     --border-radius-large: 12px;
 }
-
 body.dark-theme {
     --primary-color: var(--primary-color-dark);
     --secondary-color: var(--secondary-color-dark);
@@ -76,6 +75,8 @@ body {
     line-height: 1.7;
     transition: background-color 0.3s ease, color 0.3s ease, background-image 0.3s ease;
     font-size: 16px; 
+    scrollbar-width: auto;
+    scrollbar-color: var(--primary-color) var(--card-background);
 }
 
 /* Container */
@@ -115,6 +116,51 @@ p { margin-bottom: 1rem; opacity: 0.9; }
 a { color: var(--primary-color); text-decoration: none; transition: color 0.3s ease; }
 a:hover { color: var(--secondary-color); }
 img { max-width: 100%; height: auto; display: block; }
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--card-background);
+    border-radius: 10px;
+}
+body.dark-theme ::-webkit-scrollbar-track {
+    background-color: var(--card-background-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    border: 2px solid var(--card-background);
+}
+body.dark-theme ::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color-dark);
+    border-color: var(--card-background-dark);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--secondary-color);
+}
+body.dark-theme ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--secondary-color-dark);
+}
+
+::-webkit-scrollbar-button {
+    display: none; 
+}
+
+::-webkit-scrollbar-corner {
+    background-color: var(--card-background);
+}
+body.dark-theme ::-webkit-scrollbar-corner {
+    background-color: var(--card-background-dark);
+}
+body.dark-theme body {
+    scrollbar-color: var(--primary-color-dark) var(--card-background-dark);
+}
 
 /* Header & Navigation */
 header {
@@ -405,7 +451,7 @@ section:not(#hero) {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23${props => props.theme === 'dark' ? 'c9d1d9' : '212529'}' class='bi bi-chevron-down' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E"); /* SVG arrow */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23${props => props.theme === 'dark' ? 'c9d1d9' : '212529'}' class='bi bi-chevron-down' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 15px center;
     background-size: 16px;
