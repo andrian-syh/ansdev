@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
         element.dataset.targetValue = targetValueString;
 
         const { numericValue, suffix, prefix: initialPrefix } = parseStatValue(targetValueString);
-        let duration = 1000;
+        let duration = 1250;
 
         if (suffix === 'K+' || suffix === 'M+' || suffix === 'B+') {
             let currentAnimatedValue = 0;
