@@ -122,6 +122,26 @@ document.addEventListener('DOMContentLoaded', () => {
     async function handleSubmit(event) {
         event.preventDefault();
         const data = new FormData(event.target);
+
+        const recaptchaResponse = grecaptcha.getResponse();
+        if (recaptchaResponse.length === 0) {
+            formStatus.style.display = 'block';
+            formStatus.textContent = "Please verify you are not a robot.";
+            formStatus.className = 'form-status-message error';
+            const recaptchaWidget = document.querySelector('.g-recaptcha');
+            if (recaptchaWidget) {
+                recaptchaWidget.style.border = '1px solid red';
+                setTimeout(() => {
+                     if(recaptchaWidget) recaptchaWidget.style.border = 'none';
+                }, 2000);
+            }
+            return;
+        }
+
+        formStatus.style.display = 'block';
+        formStatus.textContent = "Sending your message...";
+        formStatus.className = 'form-status-message info';
+
         fetch(event.target.action, {
             method: form.method, body: data, headers: {'Accept': 'application/json'}
         }).then(response => {
@@ -130,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 formStatus.textContent = "Thanks for your message! I'll get back to you soon.";
                 formStatus.className = 'form-status-message success';
                 form.reset();
+                grecaptcha.reset();
             } else {
                 response.json().then(data => {
                     if (Object.hasOwn(data, 'errors')) {
@@ -138,15 +159,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         formStatus.textContent = "Oops! There was a problem submitting your form.";
                     }
                     formStatus.className = 'form-status-message error';
+                    grecaptcha.reset();
                 }).catch(() => { 
                     formStatus.textContent = "Oops! There was a problem submitting your form. Invalid response from server.";
                     formStatus.className = 'form-status-message error';
+                    grecaptcha.reset();
                 });
             }
         }).catch(error => {
             formStatus.style.display = 'block'; 
             formStatus.textContent = "Oops! There was a problem submitting your form. Network error.";
             formStatus.className = 'form-status-message error';
+            grecaptcha.reset();
         });
     }
     if (form) { form.addEventListener("submit", handleSubmit); }

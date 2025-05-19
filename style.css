@@ -551,6 +551,13 @@ body:not(.dark-theme) .portfolio-filter-select {
     outline: none; border-color: var(--primary-color);
     box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.25); 
 }
+
+.g-recaptcha {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+}
+
 .contact-form button { width: 100%; }
 .form-status-message {
     margin-top: 1rem;
