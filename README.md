@@ -1,4 +1,4 @@
-# Muhammad Andriansyah (AnS_Dev) - Personal Portfolio & Roblox Developer Showcase
+# Personal Portfolio & Roblox Developer Showcase
 
 > A dynamic online presence showcasing my journey, skills, and contributions as a Roblox Developer.
 
