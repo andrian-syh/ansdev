@@ -10,9 +10,9 @@ This project and its associated files (collectively, the "Software") are private
 
 You, as an individual or entity with authorized access, are NOT permitted to:
 
-1.  **Reproduce, copy, or distribute** the Software, in whole or in part, to any third party without prior written consent from [Your Name or Organization Name].
-2.  **Modify, adapt, translate, reverse engineer, decompile, disassemble, or create derivative works** based on the Software without prior written consent from [Your Name or Organization Name].
-3.  **Use the Software for any commercial purposes** or in any manner that is not expressly authorized in writing by [Your Name or Organization Name].
+1.  **Reproduce, copy, or distribute** the Software, in whole or in part, to any third party without prior written consent from Muhammad Andriansyah.
+2.  **Modify, adapt, translate, reverse engineer, decompile, disassemble, or create derivative works** based on the Software without prior written consent from Muhammad Andriansyah.
+3.  **Use the Software for any commercial purposes** or in any manner that is not expressly authorized in writing by Muhammad Andriansyah.
 4.  **Remove, alter, or obscure any copyright, trademark, or other proprietary notices** contained in or on the Software.
 5.  **Sublicense, lease, rent, or lend** the Software to any third party.
 
