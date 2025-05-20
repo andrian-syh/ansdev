@@ -1,6 +1,6 @@
 # Project License
 
-**Copyright (c) 2025 Muhammad Andriansyah**
+**Copyright (©) 2025 Muhammad Andriansyah**
 
 All Rights Reserved.
 
