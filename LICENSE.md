@@ -1,4 +1,4 @@
-# Project License: Personal Portfolio Website of Muhammad Andriansyah (AnS_Dev)
+# Project License: Personal Portfolio Website
 
 **Copyright (©) 2025 Muhammad Andriansyah (AnS_Dev)**
 
