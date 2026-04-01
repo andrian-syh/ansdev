@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileToggleBtn.addEventListener('click', () => {
       mobileToggleBtn.classList.toggle('active');
       mobileGlassMenu.classList.toggle('open');
-      
+
       // Lock background scrolling when mobile menu is active
       if (mobileGlassMenu.classList.contains('open')) {
         body.style.overflow = 'hidden';
@@ -73,13 +73,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Build stat item
         const itemDiv = document.createElement('div');
         itemDiv.className = 'stat-mini-item';
-        
+
         const h4 = document.createElement('h4');
         h4.className = 'stat-number';
         h4.setAttribute('data-target', stat.target);
         h4.setAttribute('data-suffix', stat.suffix);
         h4.textContent = '0' + stat.suffix;
-        
+
         const p = document.createElement('p');
         p.textContent = stat.label;
 
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const typedTextSpan = document.querySelector(".typed-text");
   const cursorSpan = document.querySelector(".cursor");
   const textArray = (typeof CONFIG !== 'undefined') ? CONFIG.profile.titles : ["Developer", "Scripter"];
-  
+
   const typingDelay = 100;
   const erasingDelay = 40;
   const newTextDelay = 2000;
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // COUNTER ANIMATION HOOK
   // ============================================
   const statNumbers = document.querySelectorAll('.stat-number');
-  
+
   function animateValue(obj, start, end, duration, suffix) {
     let startTimestamp = null;
     const step = (timestamp) => {
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (progress < 1) {
         window.requestAnimationFrame(step);
       } else {
-        obj.textContent = end + suffix; 
+        obj.textContent = end + suffix;
       }
     };
     window.requestAnimationFrame(step);
@@ -225,17 +225,17 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.className = 'filter-btn' + (index === 0 ? ' active' : '');
         btn.textContent = filter;
         btn.setAttribute('data-filter', filter);
-        
+
         btn.addEventListener('click', () => {
           // Highlight active filter button
           document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
-          
+
           currentFilter = filter;
           currentGalleryPage = 1; // Reset to page 1 on filter change
           renderProjects();
         });
-        
+
         filtersContainer.appendChild(btn);
       });
     }
@@ -244,23 +244,23 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderProjects() {
       if (!gridContainer) return;
       gridContainer.innerHTML = '';
-      
+
       // Filter projects array based on selected genre
       const filtered = pData.projects.filter(p => currentFilter === "All" || p.genre === currentFilter);
-      
+
       // Pagination parameters
       const isMobilePag = window.innerWidth <= 900;
       const itemsPerPage = isMobilePag ? 4 : 8; // Adapt items per page based on viewport size
       const totalPages = Math.ceil(filtered.length / itemsPerPage);
-      
+
       // Prevent out-of-bounds page indexing due to resize or filter events
       if (currentGalleryPage > totalPages && totalPages > 0) currentGalleryPage = totalPages;
       if (currentGalleryPage < 1) currentGalleryPage = 1;
-      
+
       // Slice array to extract current page data
       const startIndex = (currentGalleryPage - 1) * itemsPerPage;
       const paginatedItems = filtered.slice(startIndex, startIndex + itemsPerPage);
-      
+
       paginatedItems.forEach(proj => {
         const card = document.createElement('div');
         card.className = 'glass-panel project-card';
@@ -279,58 +279,58 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         gridContainer.appendChild(card);
       });
-      
+
       // Execute pagination controller rendering
       renderPagination(totalPages);
     }
-    
+
     // Pagination UI Controller Builder
     function renderPagination(totalPages) {
       const pagContainer = document.getElementById('ui-pagination-controls');
       if (!pagContainer) return;
       pagContainer.innerHTML = '';
-      
+
       if (totalPages <= 1) return; // Hide pagination if content fits single page
-      
+
       // Previous Button
       const prevBtn = document.createElement('button');
       prevBtn.className = 'page-btn';
       prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
       prevBtn.disabled = currentGalleryPage === 1;
       prevBtn.addEventListener('click', () => {
-        if (currentGalleryPage > 1) { 
-          currentGalleryPage--; 
-          renderProjects(); 
+        if (currentGalleryPage > 1) {
+          currentGalleryPage--;
+          renderProjects();
         }
       });
       pagContainer.appendChild(prevBtn);
-      
+
       // Numeric Pagination Buttons
       for (let i = 1; i <= totalPages; i++) {
         const pageBtn = document.createElement('button');
         pageBtn.className = 'page-btn' + (i === currentGalleryPage ? ' active' : '');
         pageBtn.textContent = i;
         pageBtn.addEventListener('click', () => {
-          currentGalleryPage = i; 
+          currentGalleryPage = i;
           renderProjects();
         });
         pagContainer.appendChild(pageBtn);
       }
-      
+
       // Next Button
       const nextBtn = document.createElement('button');
       nextBtn.className = 'page-btn';
       nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
       nextBtn.disabled = currentGalleryPage === totalPages;
       nextBtn.addEventListener('click', () => {
-        if (currentGalleryPage < totalPages) { 
-          currentGalleryPage++; 
-          renderProjects(); 
+        if (currentGalleryPage < totalPages) {
+          currentGalleryPage++;
+          renderProjects();
         }
       });
       pagContainer.appendChild(nextBtn);
     }
-    
+
     // Register resize listener to adapt layout dynamically
     window.addEventListener('resize', () => {
       // Debounce render execution to prevent layout thrashing
@@ -341,13 +341,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 3. Modal Functionality
-    window.openProjectModal = function(id) {
+    window.openProjectModal = function (id) {
       const proj = pData.projects.find(p => p.id === id);
       if (!proj || !modal) return;
-      
+
       document.getElementById('modal-img').src = proj.image;
       document.getElementById('modal-title').textContent = proj.title;
-      
+
       const tagsContainer = document.getElementById('modal-tags');
       tagsContainer.innerHTML = '';
       proj.tags.forEach(tag => {
@@ -356,9 +356,9 @@ document.addEventListener('DOMContentLoaded', () => {
         tSpan.textContent = tag;
         tagsContainer.appendChild(tSpan);
       });
-      
+
       document.getElementById('modal-desc').textContent = proj.description;
-      
+
       const contribul = document.getElementById('modal-contributions');
       contribul.innerHTML = '';
       proj.contributions.forEach(c => {
@@ -366,9 +366,9 @@ document.addEventListener('DOMContentLoaded', () => {
         li.textContent = c;
         contribul.appendChild(li);
       });
-      
+
       document.getElementById('modal-link').href = proj.link;
-      
+
       modal.classList.add('open');
       document.body.style.overflow = 'hidden'; // Lock background scroll
     };
@@ -378,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.remove('open');
         document.body.style.overflow = '';
       });
-      
+
       modal.addEventListener('click', (e) => {
         if (e.target === modal) {
           modal.classList.remove('open');
@@ -395,12 +395,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     const marqueeTrack1 = document.getElementById('ui-portfolio-marquee-1');
     const marqueeTrack2 = document.getElementById('ui-portfolio-marquee-2');
-    
+
     if (marqueeTrack1 && marqueeTrack2) {
-      
+
       // Duplicate data extensively to prevent visible seam clipping
       const allProjects = [...pData.projects, ...pData.projects, ...pData.projects, ...pData.projects];
-      
+
       // Node generator utility
       function fillTrack(trackElem, items) {
         items.forEach(proj => {
@@ -418,47 +418,47 @@ document.addEventListener('DOMContentLoaded', () => {
               <p class="project-genre" style="margin-bottom: 0;">${proj.genre}</p>
             </div>
           `;
-          
+
           card.addEventListener('click', () => {
             if (typeof window.openProjectModal === 'function') {
               window.openProjectModal(proj.id);
             }
           });
-          
+
           trackElem.appendChild(card);
         });
-        
+
         // Independent hover pause controller
         trackElem.addEventListener('mouseenter', () => trackElem.classList.add('paused'));
         trackElem.addEventListener('mouseleave', () => trackElem.classList.remove('paused'));
       }
-      
+
       // Split arrays pseudo-randomly for aesthetic variety
       const half1 = allProjects.filter((_, i) => i % 2 === 0);
       const half2 = allProjects.filter((_, i) => i % 2 !== 0);
-      
+
       fillTrack(marqueeTrack1, half1);
       fillTrack(marqueeTrack2, half2);
     }
-    
+
     // ==========================================
     // 5. TESTIMONIALS / REPUTATION LOGIC
     // ==========================================
     const testiGrid = document.getElementById('ui-testimonial-grid');
     const testiActionsContainer = document.getElementById('ui-testimonial-actions');
-    
+
     if (testiGrid && CONFIG.testimonials) {
       let testiLimit = 6;
       let testiPage = 1;
       const tData = CONFIG.testimonials;
-      
+
       function renderTestimonials() {
         testiGrid.innerHTML = '';
-        
+
         let mode = 'all';
         let startIndex = 0;
         let endIndex = tData.length;
-        
+
         if (tData.length > 12) {
           mode = 'pagination';
           startIndex = (testiPage - 1) * 6;
@@ -469,29 +469,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const visibleData = tData.slice(startIndex, endIndex);
-        
+
         visibleData.forEach(item => {
           // Generate Rating Stars HTML
           let starsHTML = '';
-          for(let i=1; i<=5; i++) {
+          for (let i = 1; i <= 5; i++) {
             if (i <= item.rating) {
               starsHTML += '<i class="fas fa-star"></i>';
             } else {
               starsHTML += '<i class="far fa-star" style="color: rgba(255,255,255,0.2);"></i>';
             }
           }
-          
+
           // Define initials fallback
           const initials = item.name.replace(/[^a-zA-Z]/g, '').charAt(0) || '?';
           // Direct Image Validator - Fallback defined inline via onerror DOM event
           const isDirectImage = item.avatar && item.avatar.trim().length > 0 && item.avatar.startsWith('http');
-          
+
           const avatarHTML = isDirectImage
             ? `<img src="${item.avatar}" alt="${item.name}" class="testi-avatar" 
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                <div class="testi-avatar-fallback" style="display:none;">${initials}</div>`
             : `<div class="testi-avatar-fallback">${initials}</div>`;
-          
+
           const card = document.createElement('a');
           card.href = item.link || '#';
           card.target = "_blank";
@@ -513,37 +513,37 @@ document.addEventListener('DOMContentLoaded', () => {
           `;
           testiGrid.appendChild(card);
         });
-        
+
         // Render Controls
         if (testiActionsContainer) {
           testiActionsContainer.innerHTML = '';
-          
+
           if (mode === 'loadmore' && testiLimit === 6) {
             testiActionsContainer.style.display = 'block';
             testiActionsContainer.innerHTML = `<button class="btn-pill-show-more" id="btn-load-more-testimonials"><span class="btn-pill-text">Show More Voices</span> <i class="fas fa-arrow-right btn-pill-icon"></i></button>`;
-            
+
             document.getElementById('btn-load-more-testimonials').addEventListener('click', () => {
-              testiLimit = 12; 
+              testiLimit = 12;
               renderTestimonials();
             });
           } else if (mode === 'pagination') {
             testiActionsContainer.style.display = 'block';
             const totalPages = Math.ceil(tData.length / 6);
             let pageButtons = '';
-            
+
             // Prev
             pageButtons += `<button class="page-btn" ${testiPage === 1 ? 'disabled' : ''} data-page="${testiPage - 1}"><i class="fas fa-chevron-left"></i></button>`;
-            
+
             // Numbers
             for (let i = 1; i <= totalPages; i++) {
               pageButtons += `<button class="page-btn ${i === testiPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
             }
-            
+
             // Next
             pageButtons += `<button class="page-btn" ${testiPage === totalPages ? 'disabled' : ''} data-page="${testiPage + 1}"><i class="fas fa-chevron-right"></i></button>`;
-            
+
             testiActionsContainer.innerHTML = `<div class="pagination-controls" style="margin-top: 0;">${pageButtons}</div>`;
-            
+
             testiActionsContainer.querySelectorAll('.page-btn:not(:disabled)').forEach(btn => {
               btn.addEventListener('click', (e) => {
                 testiPage = parseInt(e.currentTarget.getAttribute('data-page'));
@@ -556,17 +556,17 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
       }
-      
+
       renderTestimonials();
     }
-    
+
     // ==========================================
     // 6. ACTIVE NAV SPY (Scroll Tracker)
     // ==========================================
     const sections = document.querySelectorAll('section[id]');
     // Exclusively target internal anchor links mapping to sections
     const hashLinks = document.querySelectorAll('.nav-links a[href^="#"], .mobile-nav-item[href^="#"]');
-    
+
     if (sections.length > 0 && hashLinks.length > 0) {
       const observerOptions = {
         root: null,
@@ -590,14 +590,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       sections.forEach(sec => navObserver.observe(sec));
     }
-    
+
     // ==========================================
     // 7. SERVICES (RATE CARDS) LOGIC
     // ==========================================
     const pBoard = document.getElementById('ui-pricing-board');
     if (pBoard && CONFIG.services && CONFIG.services.length > 0) {
       pBoard.innerHTML = '';
-      
+
       // Intelligent regional pricing detection based on client timezone/language
       let userRegion = 'default';
       try {
@@ -610,7 +610,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (e) {
         console.warn("Region detection failed", e);
       }
-      
+
       CONFIG.services.forEach(svc => {
         // Render features as a list with custom bullets
         let featuresHTML = '';
@@ -622,15 +622,15 @@ document.addEventListener('DOMContentLoaded', () => {
             </li>
           `;
         });
-        
+
         // Resolve boolean recommendation flag
         const isRecmpClass = svc.recommended ? ' recommended' : '';
         const badgeHTML = svc.recommended ? `<div class="recommended-badge"><i class="fas fa-star" style="margin-right:4px;"></i> Recommended</div>` : '';
-        
+
         // Resolve CTA configuration
         const btnClass = svc.recommended ? 'btn-primary' : 'btn-outline';
         const finalBtnLabel = svc.btnLabel || (svc.recommended ? 'Request Quote' : 'Inquire Now');
-        
+
         // Regional Price Evaluator
         let displayPrice = "";
         let priceSubscript = "";
@@ -644,15 +644,15 @@ document.addEventListener('DOMContentLoaded', () => {
           // String-primitive backward compatibility hook for older configs
           displayPrice = svc.price;
         }
-        
-        const priceHTML = priceSubscript 
-            ? `<div class="pricing-price">${displayPrice} <small>${priceSubscript}</small></div>`
-            : `<div class="pricing-price">${displayPrice}</div>`;
-        
+
+        const priceHTML = priceSubscript
+          ? `<div class="pricing-price">${displayPrice} <small>${priceSubscript}</small></div>`
+          : `<div class="pricing-price">${displayPrice}</div>`;
+
         // Assemble column architecture
         const col = document.createElement('div');
         col.className = `pricing-col${isRecmpClass}`;
-        
+
         col.innerHTML = `
           ${badgeHTML}
           <div class="pricing-icon"><i class="${svc.icon}"></i></div>
@@ -668,21 +668,21 @@ document.addEventListener('DOMContentLoaded', () => {
             ${finalBtnLabel}
           </a>
         `;
-        
+
         pBoard.appendChild(col);
       });
-      
+
       // Mouse Hover Glow Effect Logic
       pBoard.addEventListener('mousemove', (e) => {
         const rect = pBoard.getBoundingClientRect();
         const x = e.clientX - rect.left; // Translate global X to container-relative coordinate
         const y = e.clientY - rect.top;  // Translate global Y to container-relative coordinate
-        
+
         // Expose coordinates as CSS variables for dynamic radial-gradient rendering
         pBoard.style.setProperty('--mouse-x', `${x}px`);
         pBoard.style.setProperty('--mouse-y', `${y}px`);
       });
-      
+
       // Glow fade-out relies natively on CSS opacity transitions
     }
 
@@ -695,14 +695,14 @@ document.addEventListener('DOMContentLoaded', () => {
         link.href = '#'; // Prevent jump
         link.className = 'service-info-link';
         link.textContent = info.text;
-        
+
         link.addEventListener('click', (e) => {
           e.preventDefault();
           if (typeof window.openInfoModal === 'function') {
             window.openInfoModal(info);
           }
         });
-        
+
         sLinksDoc.appendChild(link);
       });
     }
@@ -717,9 +717,116 @@ document.addEventListener('DOMContentLoaded', () => {
     const infoModalSubtitle = document.getElementById('info-modal-subtitle');
     const infoModalContent = document.getElementById('info-modal-content');
 
-    // Scroll Spy state trackers
+    // Scroll Spy & ToS Acceptance states
     let isScrollingFromClick = false;
     let scrollTimeout;
+
+    let isTosCurrentlyOpen = false;
+    let hasScrolledTosToBottom = false;
+
+    const tosModule = document.getElementById('tos-acceptance-module');
+    const tosSigInput = document.getElementById('tos-signature-input');
+    const tosCheckbox = document.getElementById('tos-agree-checkbox');
+    const tosAcceptBtn = document.getElementById('tos-accept-btn');
+
+    function checkTosScrollRequirement() {
+      if (!infoModalContent) return false;
+      // Evaluate if inner content overflows container vertically
+      return infoModalContent.scrollHeight > infoModalContent.clientHeight + 10;
+    }
+
+    function validateTosAcceptance() {
+      if (!isTosCurrentlyOpen || !tosModule || !tosSigInput || !tosCheckbox || !tosAcceptBtn) return;
+
+      const hasSignature = tosSigInput.value.trim().length >= 3;
+      const isChecked = tosCheckbox.checked;
+
+      // Permit acceptance if scrolled fully OR if scrollbar natively disabled by short content
+      if ((hasScrolledTosToBottom || !checkTosScrollRequirement()) && hasSignature && isChecked) {
+        tosAcceptBtn.disabled = false;
+      } else {
+        tosAcceptBtn.disabled = true;
+      }
+    }
+
+    if (tosSigInput) tosSigInput.addEventListener('input', validateTosAcceptance);
+    if (tosCheckbox) tosCheckbox.addEventListener('change', validateTosAcceptance);
+
+    async function fetchClientIPMetadata() {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        if (!response.ok) return {};
+        const data = await response.json();
+        return {
+          ip: data.ip || 'Unknown',
+          city: data.city || 'Unknown',
+          region: data.region || 'Unknown',
+          country: data.country_name || 'Unknown',
+          isp: data.org || 'Unknown'
+        };
+      } catch (err) {
+        console.warn("Could not fetch extended client IP data:", err);
+        return {};
+      }
+    }
+
+    if (tosAcceptBtn) {
+      tosAcceptBtn.addEventListener('click', async () => {
+        // Enforce spam/rate limiting (allow max 1 sub per 30 seconds)
+        const lastSubmit = parseInt(localStorage.getItem('tos_last_submit_time') || '0', 10);
+        if (Date.now() - lastSubmit < 30000) {
+          alert('Please wait before trying again.');
+          return;
+        }
+
+        const signature = tosSigInput.value.trim();
+        const originalText = tosAcceptBtn.innerText;
+        
+        // UX: Disable UI and show loading
+        tosAcceptBtn.innerText = 'Fetching Data & Saving...';
+        tosAcceptBtn.disabled = true;
+
+        // Fetch user IP details securely
+        const ipData = await fetchClientIPMetadata();
+        
+        // Attempt Firestore save
+        if (typeof window.saveSignatureToDatabase === 'function') {
+          const result = await window.saveSignatureToDatabase(signature, ipData);
+          if (!result || !result.success) {
+            console.error("Firestore save failed.");
+            alert('Failed to save your agreement. Please try again.');
+            tosAcceptBtn.innerText = originalText;
+            tosAcceptBtn.disabled = false;
+            return; // Abort operation visually so user can try again
+          }
+        } else {
+          console.warn("Firebase script not loaded yet or blocked, proceeding with local acceptance only.");
+        }
+
+        // Tag the submission time to block massive spam retries
+        localStorage.setItem('tos_last_submit_time', Date.now().toString());
+
+        console.log("ToS fully accepted and signed by:", signature);
+
+        // Set complex persistent flag: timestamp and modal version (from header subtitle)
+        const tosVersion = infoModalSubtitle ? infoModalSubtitle.textContent : '';
+        const acceptanceData = {
+          accepted: true,
+          timestamp: Date.now(),
+          version: tosVersion
+        };
+        localStorage.setItem('tos_acceptance_data', JSON.stringify(acceptanceData));
+
+        // Manipulate UI to confirmed state securely
+        if (tosSigInput.parentElement) tosSigInput.parentElement.style.display = 'none';
+        tosAcceptBtn.style.display = 'none';
+        tosAcceptBtn.innerText = originalText; // Reset for next time if needed
+        if (tosCheckbox) {
+          tosCheckbox.checked = true;
+          tosCheckbox.disabled = true;
+        }
+      });
+    }
 
     // Attach Scroll listener to independently scrollable content area
     if (infoModalContent) {
@@ -749,7 +856,7 @@ document.addEventListener('DOMContentLoaded', () => {
           infoModalNav.querySelectorAll('.info-nav-item').forEach((btn, idx) => {
             if (idx === currentActiveIndex) {
               btn.classList.add('active');
-              
+
               // Ensure the selected sidebar item stays visible in the sidebar's own scroll context
               const btnRect = btn.getBoundingClientRect();
               const sidebarRect = infoModalNav.parentElement.getBoundingClientRect();
@@ -766,11 +873,28 @@ document.addEventListener('DOMContentLoaded', () => {
         cards.forEach((c, idx) => {
           c.classList.toggle('active-card', idx === currentActiveIndex);
         });
+
+        // -------------------------
+        // Evaluate ToS Form Auto-Unlock condition
+        // -------------------------
+        if (isTosCurrentlyOpen && !hasScrolledTosToBottom) {
+          const contentScrollHeight = infoModalContent.scrollHeight;
+          const contentClientHeight = infoModalContent.clientHeight;
+          const contentScrollTop = infoModalContent.scrollTop;
+
+          // Utilize a 20px threshold buffer to resolve device layout imprecisions
+          if (contentScrollHeight - contentScrollTop - contentClientHeight < 20) {
+            hasScrolledTosToBottom = true;
+            validateTosAcceptance();
+          }
+        }
       });
     }
 
-    window.openInfoModal = function(infoObj) {
+    window.openInfoModal = function (infoObj) {
       if (!infoModal || !infoObj || !infoObj.sections) return;
+
+      isTosCurrentlyOpen = (infoObj.id === 'tos');
 
       // Populate header
       if (infoModalTitle) infoModalTitle.textContent = infoObj.title || infoObj.text;
@@ -827,6 +951,57 @@ document.addEventListener('DOMContentLoaded', () => {
         infoModalContent.scrollTop = 0;
       }
 
+      // -------------------------
+      // Mount ToS Form Visibility Layer
+      // -------------------------
+      if (isTosCurrentlyOpen && tosModule) {
+        tosModule.style.display = 'flex';
+        
+        // Evaluate dynamic 14-days & Version validation
+        let isAlreadyAccepted = false;
+        try {
+          const rawData = localStorage.getItem('tos_acceptance_data');
+          if (rawData) {
+            const savedData = JSON.parse(rawData);
+            const daysPassed = (Date.now() - savedData.timestamp) / (1000 * 60 * 60 * 24);
+            const currentVersion = infoObj.subtitle || '';
+            
+            // Re-prompt if 14 days passed or if ToS version text has updated
+            if (daysPassed < 14 && savedData.version === currentVersion) {
+              isAlreadyAccepted = true;
+            }
+          }
+        } catch(e) { console.warn('Could not parse ToS local storage', e); }
+
+        if (isAlreadyAccepted) {
+          if (tosSigInput && tosSigInput.parentElement) tosSigInput.parentElement.style.display = 'none';
+          if (tosAcceptBtn) tosAcceptBtn.style.display = 'none';
+          if (tosCheckbox) {
+            tosCheckbox.checked = true;
+            tosCheckbox.disabled = true;
+          }
+        } else {
+          hasScrolledTosToBottom = false;
+          if (tosSigInput) {
+            if (tosSigInput.parentElement) tosSigInput.parentElement.style.display = 'block';
+            tosSigInput.value = '';
+          }
+          if (tosCheckbox) {
+            tosCheckbox.checked = false;
+            tosCheckbox.disabled = false;
+          }
+          if (tosAcceptBtn) {
+            tosAcceptBtn.style.display = 'block';
+            tosAcceptBtn.disabled = true;
+          }
+
+          // Defer validation slightly allowing DOM engine to render scrollHeight geometry accurately
+          setTimeout(validateTosAcceptance, 100);
+        }
+      } else if (tosModule) {
+        tosModule.style.display = 'none';
+      }
+
       infoModal.classList.add('open');
       document.body.style.overflow = 'hidden';
     };
@@ -846,7 +1021,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }
-    
+
     // ==========================================
     // 9. CONTACT FORM LOGIC
     // ==========================================
@@ -855,9 +1030,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.getElementById('contact-submit-btn');
 
     if (contactForm && statusMsg && submitBtn) {
-      contactForm.addEventListener('submit', async function(e) {
+      contactForm.addEventListener('submit', async function (e) {
         e.preventDefault();
-        
+
         // ReCAPTCHA Verification Request
         const captchaResponse = typeof grecaptcha !== 'undefined' ? grecaptcha.getResponse() : '';
         if (!captchaResponse) {
@@ -880,7 +1055,7 @@ document.addEventListener('DOMContentLoaded', () => {
             method: 'POST',
             body: formData,
             headers: {
-                'Accept': 'application/json'
+              'Accept': 'application/json'
             }
           });
 
