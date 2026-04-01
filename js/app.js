@@ -1004,6 +1004,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       infoModal.classList.add('open');
       document.body.style.overflow = 'hidden';
+
+      // Push deep-link hash to URL for shareability
+      window.history.replaceState(null, '', `#info-${infoObj.id}`);
     };
 
     if (infoCloseBtn && infoModal) {
@@ -1011,6 +1014,7 @@ document.addEventListener('DOMContentLoaded', () => {
       infoCloseBtn.addEventListener('click', () => {
         infoModal.classList.remove('open');
         document.body.style.overflow = '';
+        window.history.replaceState(null, '', window.location.pathname);
       });
 
       // Close on clicking outside the modal panel overlay
@@ -1018,8 +1022,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === infoModal) {
           infoModal.classList.remove('open');
           document.body.style.overflow = '';
+          window.history.replaceState(null, '', window.location.pathname);
         }
       });
+    }
+
+    // Auto-open info modal from deep-link hash on page load
+    const urlHash = window.location.hash;
+    if (urlHash.startsWith('#info-')) {
+      const targetId = urlHash.replace('#info-', '');
+      const targetInfo = CONFIG.serviceInfo.find(i => i.id === targetId);
+      if (targetInfo) {
+        setTimeout(() => window.openInfoModal(targetInfo), 500);
+      }
     }
 
     // ==========================================
