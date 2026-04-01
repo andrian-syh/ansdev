@@ -135,7 +135,7 @@ const CONFIG = {
       avatar: "https://api.newstargeted.com/roblox/users/v1/avatar-headshot?userid=6048903818&size=150x150&format=Png&isCircular=false",
       rating: 5,
       link: "https://www.roblox.com/users/6048903818/profile",
-      text: "This developer demonstrates highly professional and consistent performance. Not only do they deliver work on time, but they also consistently bring creative and innovative solutions to every project they undertake."
+      text: "This developer demonstrates highly professional and consistent performance. Not only do he deliver work on time, but he also consistently bring creative and innovative solutions to every project he undertake."
     },
     {
       id: 2,
