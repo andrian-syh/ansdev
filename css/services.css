@@ -247,6 +247,19 @@
     padding-top: 4rem;
     /* Give space for badge */
   }
+
+  /* Reset inherited desktop corner rounding for vertical stack */
+  .pricing-col:first-child {
+    border-radius: 0;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }
+
+  .pricing-col:last-child {
+    border-radius: 0;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+  }
 }
 
 /* ============================
@@ -529,57 +542,70 @@
 /* --- Responsive / Mobile --- */
 @media (max-width: 700px) {
   .info-modal-panel {
-    width: 95%;
-    height: 90vh;
-    max-height: 700px;
+    width: 96%;
+    height: 92vh;
+    max-height: none;
+    border-radius: 16px;
   }
 
+  /* Hide the sidebar navigation completely on mobile */
+  .info-modal-sidebar {
+    display: none;
+  }
+
+  /* Switch to single-column stacked layout */
   .info-modal-layout {
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: 1fr;
     flex: 1;
     min-height: 0;
   }
 
-  .info-modal-sidebar {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 1rem 0;
-    max-height: 180px;         /* Specific constraint on mobile */
-    overflow-y: auto;
-  }
-
-  .info-modal-sidebar-nav {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0;
-    padding: 0 1rem;
-  }
-
-  .info-nav-item {
-    padding: 0.6rem 1rem;
-    font-size: 0.8rem;
-    border-left: none;
-    border-bottom: 2px solid transparent;
-    flex: 0 0 auto;
-  }
-
-  .info-nav-item.active {
-    border-left-color: transparent;
-    border-bottom-color: var(--primary);
-  }
-
-  .info-nav-item.active::after {
-    display: none;
-  }
-
   .info-modal-main {
-    padding: 1.5rem;
+    padding: 1.25rem;
+  }
+
+  .info-modal-header {
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+  }
+
+  .info-modal-header h2 {
+    font-size: 1.3rem;
   }
 
   .info-modal-content-area {
     width: 100%;
-    max-height: unset; /* Relies on flex constraint */
+    max-height: unset;
+  }
+
+  .info-section-card {
+    padding: 1.25rem;
+  }
+
+  .info-section-card-header strong {
+    font-size: 0.88rem;
+  }
+
+  .info-section-card-body {
+    font-size: 0.85rem;
+  }
+
+  /* Ensure close button is always easily reachable */
+  .info-modal-panel > .modal-close-btn {
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 10;
+  }
+
+  /* ToS acceptance module mobile tweaks */
+  .tos-acceptance-module {
+    padding-top: 1rem;
+  }
+
+  #tos-accept-btn {
+    width: 100%;
+    text-align: center;
   }
 }
 

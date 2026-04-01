@@ -31,12 +31,12 @@ const CONFIG = {
   about: {
     eyebrow: "WHO I AM",
     title: "About Me",
-    image: "assets/images/about-img.jpg",
+    image: "assets/images/about-img.webp",
     paragraphs: [
       "Hello! I'm Muhammad Andriansyah, but you can call me <strong>Andri</strong>. I dive deep into the world of Roblox game development, driven by a passion for crafting engaging and technically sound experiences. My core strength lies in <strong>Luau scripting</strong>, where I transform complex ideas into seamless gameplay mechanics, robust game systems, and user-friendly interfaces.",
       "I thrive on challenges and continuously seek to expand my knowledge in game design principles, performance optimization, and innovative Roblox features. My goal is to not just build games, but to create worlds that players love to explore and interact with."
     ],
-    skills: ["Luau Scripting", "Game Mechanics", "System Architecture", "Performance Optimization", "UI/UX Systems"],
+    skills: ["Expert Luau Programmer", "Full-Stack Developer", "Clean & Modular Code", "Roblox Studio Specialist"],
     cvLink: "assets/docs/MUHAMMAD ANDRIANSYAH (ATS CV).pdf"
   },
 
@@ -130,12 +130,30 @@ const CONFIG = {
   testimonials: [
     {
       id: 1,
-      name: "JJE",
+      name: "JJE (@0x000101)",
       title: "Owner of Sunday Studios.",
       avatar: "https://api.newstargeted.com/roblox/users/v1/avatar-headshot?userid=6048903818&size=150x150&format=Png&isCircular=false",
       rating: 5,
       link: "https://www.roblox.com/users/6048903818/profile",
-      text: "Absolutely stunning work! The narrative systems implemented for our Horror game completely transformed the player experience. Always delivers ahead of schedule."
+      text: "This developer demonstrates highly professional and consistent performance. Not only do they deliver work on time, but they also consistently bring creative and innovative solutions to every project they undertake."
+    },
+    {
+      id: 2,
+      name: "Ndraa (@andra1106)",
+      title: "Students of ISI Surakarta",
+      avatar: "https://api.newstargeted.com/roblox/users/v1/avatar-headshot?userid=126234819&size=150x150&format=Png&isCircular=false",
+      rating: 5,
+      link: "https://www.roblox.com/users/126234819/profile",
+      text: "Awesome work, man! Contributed a ton to the development. Decisive and fast—hands down the best scripter I've met so far, haha!"
+    },
+    {
+      id: 3,
+      name: "Gusti (@GustiXFZ)",
+      title: "Brand Strategist at Volumetric",
+      avatar: "https://api.newstargeted.com/roblox/users/v1/avatar-headshot?userid=2536237406&size=150x150&format=Png&isCircular=false",
+      rating: 5,
+      link: "https://www.roblox.com/users/2536237406/profile",
+      text: "The best scripter I’ve ever met! He’s contributed to several games that consistently generate high CCU numbers, and his performance is truly outstanding. If you’re planning to create a perfect game, you’ve found the right person!"
     },
   ],
 
