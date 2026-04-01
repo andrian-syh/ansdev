@@ -395,8 +395,9 @@
           <!-- ToS Acceptance Module -->
           <div class="tos-acceptance-module" id="tos-acceptance-module" style="display: none;">
             <div class="tos-input-group">
-              <input type="text" id="tos-signature-input" class="form-input"
-                placeholder="Signature" autocomplete="off">
+              <input type="text" id="tos-signature-input" class="form-input" placeholder="Signature" autocomplete="off">
+              <input type="email" id="tos-email-input" class="form-input" placeholder="Email Address"
+                autocomplete="off">
             </div>
             <div class="tos-check-group">
               <input type="checkbox" id="tos-agree-checkbox" class="tos-checkbox">
@@ -432,7 +433,7 @@
   <!-- Firebase & Firestore Integration -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, getDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyD8eIF0vWzpZBJw0HGtukOdY3C5zETGAsk",
@@ -451,9 +452,9 @@
     // Expose a globally accessible function for app.js to interact with Firestore
     window.saveSignatureToDatabase = async function (signatureName, extraData = {}) {
       try {
-        // Calculate expiration 14 days in the future for Firestore TTL
+        // Calculate expiration 30 days in the future for Firestore TTL
         const ttlDate = new Date();
-        ttlDate.setDate(ttlDate.getDate() + 14);
+        ttlDate.setDate(ttlDate.getDate() + 30);
 
         const docRef = await addDoc(collection(db, "tos_agreements"), {
           signature: signatureName,
@@ -469,7 +470,40 @@
         return { success: false, error: error };
       }
     };
+
+    // Retrieve signed data from Firestore by ID for returning users
+    window.getSignatureFromDatabase = async function (docId) {
+      if (!docId) return { success: false, error: "Missing ID" };
+      try {
+        const docRef = doc(db, "tos_agreements", docId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          // Convert Firestore timestamp to readable string if it exists
+          const timestamp = data.agreedAt ? data.agreedAt.toDate().toLocaleString() : new Date().toLocaleString();
+          return {
+            success: true,
+            data: {
+              signature: data.signature,
+              email: data.email,
+              docId: docSnap.id,
+              version: data.tosVersion || 'v1.0',
+              timestamp: timestamp
+            }
+          };
+        } else {
+          return { success: false, error: "No such document!" };
+        }
+      } catch (error) {
+        console.error("Firestore retrieval failed:", error);
+        return { success: false, error: error };
+      }
+    };
   </script>
+
+  <!-- PDF Generation Logic Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <script src="js/config.js"></script>
   <script src="js/app.js"></script>

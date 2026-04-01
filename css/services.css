@@ -916,6 +916,16 @@
 
 .tos-input-group {
   width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .tos-input-group {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
 }
 
 .tos-input-group input {
@@ -1013,4 +1023,19 @@
   box-shadow: none;
   cursor: not-allowed;
   transform: none;
+}
+
+#tos-accept-btn.btn-success {
+  background: #10b981;
+  border-color: #10b981;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  opacity: 1;
+  cursor: pointer;
+}
+
+#tos-accept-btn.btn-success:hover {
+  background: #059669;
+  border-color: #059669;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
 }

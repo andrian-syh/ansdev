@@ -739,8 +739,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const tosModule = document.getElementById('tos-acceptance-module');
     const tosSigInput = document.getElementById('tos-signature-input');
+    const tosEmailInput = document.getElementById('tos-email-input');
     const tosCheckbox = document.getElementById('tos-agree-checkbox');
     const tosAcceptBtn = document.getElementById('tos-accept-btn');
+
+    // Local state to store signed data for download
+    let signedData = null;
 
     function checkTosScrollRequirement() {
       if (!infoModalContent) return false;
@@ -751,18 +755,27 @@ document.addEventListener('DOMContentLoaded', () => {
     function validateTosAcceptance() {
       if (!isTosCurrentlyOpen || !tosModule || !tosSigInput || !tosCheckbox || !tosAcceptBtn) return;
 
-      const hasSignature = tosSigInput.value.trim().length >= 3;
+      const signature = tosSigInput.value.trim();
+      const email = tosEmailInput ? tosEmailInput.value.trim() : '';
       const isChecked = tosCheckbox.checked;
 
+      // Basic Email Regex
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const isEmailValid = emailRegex.test(email);
+
       // Permit acceptance if scrolled fully OR if scrollbar natively disabled by short content
-      if ((hasScrolledTosToBottom || !checkTosScrollRequirement()) && hasSignature && isChecked) {
-        tosAcceptBtn.disabled = false;
+      if ((hasScrolledTosToBottom || !checkTosScrollRequirement()) && signature.length >= 2 && isEmailValid && isChecked) {
+        // Only enable if we haven't already signed (checking if btn is in success mode)
+        if (!tosAcceptBtn.classList.contains('btn-success')) {
+          tosAcceptBtn.disabled = false;
+        }
       } else {
         tosAcceptBtn.disabled = true;
       }
     }
 
     if (tosSigInput) tosSigInput.addEventListener('input', validateTosAcceptance);
+    if (tosEmailInput) tosEmailInput.addEventListener('input', validateTosAcceptance);
     if (tosCheckbox) tosCheckbox.addEventListener('change', validateTosAcceptance);
 
     async function fetchClientIPMetadata() {
@@ -785,6 +798,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (tosAcceptBtn) {
       tosAcceptBtn.addEventListener('click', async () => {
+        // If button is in Download mode, trigger PDF generation
+        if (tosAcceptBtn.classList.contains('btn-success') && signedData) {
+          generateTosPdf(signedData);
+          return;
+        }
+
         // Enforce spam/rate limiting (allow max 1 sub per 30 seconds)
         const lastSubmit = parseInt(localStorage.getItem('tos_last_submit_time') || '0', 10);
         if (Date.now() - lastSubmit < 30000) {
@@ -793,24 +812,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const signature = tosSigInput.value.trim();
+        const email = tosEmailInput.value.trim();
         const originalText = tosAcceptBtn.innerText;
 
         // UX: Disable UI and show loading
-        tosAcceptBtn.innerText = 'Fetching Data & Saving...';
+        tosAcceptBtn.innerText = 'Signing & Logging...';
         tosAcceptBtn.disabled = true;
 
         // Fetch user IP details securely
         const ipData = await fetchClientIPMetadata();
 
         // Retrieve ToS version from CONFIG (defined in config.js)
-        const tosConfig = (typeof CONFIG !== 'undefined' && CONFIG.serviceInfo) 
-          ? CONFIG.serviceInfo.find(i => i.id === 'tos') 
+        const tosConfig = (typeof CONFIG !== 'undefined' && CONFIG.serviceInfo)
+          ? CONFIG.serviceInfo.find(i => i.id === 'tos')
           : null;
         const tosVersion = tosConfig ? (tosConfig.version || 'v1.0') : 'v1.0';
 
         // Enhanced metadata collection for audit log
         const auditLogData = {
           ...ipData,
+          email: email,
           tosVersion: tosVersion,
           browser: navigator.userAgent,
           platform: navigator.platform,
@@ -823,6 +844,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // Attempt Firestore save
+        let docId = "LOCAL_ONLY";
         if (typeof window.saveSignatureToDatabase === 'function') {
           const result = await window.saveSignatureToDatabase(signature, auditLogData);
           if (!result || !result.success) {
@@ -832,32 +854,131 @@ document.addEventListener('DOMContentLoaded', () => {
             tosAcceptBtn.disabled = false;
             return; // Abort operation visually so user can try again
           }
+          docId = result.id;
         } else {
           console.warn("Firebase script not loaded yet or blocked, proceeding with local acceptance only.");
         }
 
+        // Store data for PDF generation
+        const timestamp = new Date().toLocaleString();
+        signedData = { signature, email, docId, version: tosVersion, timestamp };
+
         // Tag the submission time to block massive spam retries
         localStorage.setItem('tos_last_submit_time', Date.now().toString());
-
-        console.log("ToS fully accepted and signed by:", signature);
 
         // Set complex persistent flag for local tracking
         const acceptanceData = {
           accepted: true,
           timestamp: Date.now(),
-          version: tosVersion
+          version: tosVersion,
+          email: email,
+          docId: docId
         };
         localStorage.setItem('tos_acceptance_data', JSON.stringify(acceptanceData));
 
-        // Manipulate UI to confirmed state securely
+        tosAcceptBtn.classList.add('btn-success');
+        tosAcceptBtn.innerText = 'Download Agreement (PDF)';
+        tosAcceptBtn.disabled = false;
+
+        // Hide input fields visually but keep them in DOM
         if (tosSigInput.parentElement) tosSigInput.parentElement.style.display = 'none';
-        tosAcceptBtn.style.display = 'none';
-        tosAcceptBtn.innerText = originalText; // Reset for next time if needed
+
+        // Lock inputs
+        if (tosSigInput) tosSigInput.disabled = true;
+        if (tosEmailInput) tosEmailInput.disabled = true;
         if (tosCheckbox) {
           tosCheckbox.checked = true;
           tosCheckbox.disabled = true;
         }
+
+        console.log("ToS Agreement Finalized. Receipt available for download.");
       });
+    }
+
+    // PDF Generation Helper Function using jsPDF
+    function generateTosPdf(data) {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      // Styling Defaults
+      const margin = 20;
+      let y = 25;
+
+      // Header
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(22);
+      doc.setTextColor(59, 130, 246); // Primary Blue
+      doc.text("DIGITAL SERVICE AGREEMENT", margin, y);
+
+      y += 15;
+      doc.setFontSize(10);
+      doc.setTextColor(100, 100, 100);
+      doc.setFont("helvetica", "normal");
+      doc.text(`Certificate ID: ${data.docId}`, margin, y);
+      doc.text(`Version: ${data.version}`, 120, y);
+
+      y += 10;
+      doc.setDrawColor(200, 200, 200);
+      doc.line(margin, y, 190, y);
+
+      // Body Section
+      y += 15;
+      doc.setFontSize(14);
+      doc.setTextColor(0, 0, 0);
+      doc.setFont("helvetica", "bold");
+      doc.text("Agreement Parties", margin, y);
+
+      y += 10;
+      doc.setFontSize(11);
+      doc.setFont("helvetica", "normal");
+      doc.text(`Developer: AnS_Dev`, margin, y);
+      y += 7;
+      doc.text(`Client Name: ${data.signature}`, margin, y);
+      y += 7;
+      doc.text(`Client Email: ${data.email}`, margin, y);
+
+      y += 15;
+      doc.setFont("helvetica", "bold");
+      doc.text("Agreement Summary", margin, y);
+
+      y += 8;
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(10);
+      const summaryText = "By signing this document electronically, the Client acknowledges that they have read, understood, and agreed to be bound by the full Terms of Service (ToS) as outlined on the AnS_Dev portfolio website. This agreement includes compliance with platform terms, payment schedules, and project scope boundaries. Both parties recognize this digital record as legally binding evidence of acceptance.";
+      const splitLines = doc.splitTextToSize(summaryText, 170);
+      doc.text(splitLines, margin, y);
+
+      y += (splitLines.length * 5) + 15;
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(11);
+      doc.text("Digital Signatures", margin, y);
+
+      // Signature Boxes
+      y += 10;
+      doc.setDrawColor(230, 230, 230);
+      doc.setFillColor(248, 250, 252);
+      doc.rect(margin, y, 80, 25, 'FD');
+      doc.rect(110, y, 80, 25, 'FD');
+
+      y += 10;
+      doc.setFont("courier", "italic");
+      doc.text("AnS_Dev", margin + 10, y);
+      doc.text(data.signature, 110 + 10, y);
+
+      y += 10;
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(8);
+      doc.text("Developer Digital Stamp", margin + 5, y);
+      doc.text("Client Digital Signature", 110 + 5, y);
+
+      // Footer
+      y = 280;
+      doc.setFontSize(8);
+      doc.setTextColor(150, 150, 150);
+      doc.text(`Signed digitally on ${data.timestamp}. All data logged securely.`, 105, y, { align: "center" });
+
+      // Save
+      doc.save(`ToS_Agreement_${data.signature.replace(/\s+/g, '_')}.pdf`);
     }
 
     // Attach Scroll listener to independently scrollable content area
@@ -1098,34 +1219,72 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isTosCurrentlyOpen && tosModule) {
         tosModule.style.display = 'flex';
 
-        // Evaluate dynamic 14-days & Version validation
+        // Evaluate dynamic 30-days & Version validation
         let isAlreadyAccepted = false;
+        let savedDocId = null;
+
         try {
           const rawData = localStorage.getItem('tos_acceptance_data');
           if (rawData) {
             const savedData = JSON.parse(rawData);
             const daysPassed = (Date.now() - savedData.timestamp) / (1000 * 60 * 60 * 24);
-            const currentVersion = infoObj.subtitle || '';
+            const currentVersion = infoObj.version || 'v1.0';
 
-            // Re-prompt if 14 days passed or if ToS version text has updated
-            if (daysPassed < 14 && savedData.version === currentVersion) {
+            // Re-prompt if 30 days passed or if ToS version text has updated
+            if (daysPassed < 30 && savedData.version === currentVersion) {
               isAlreadyAccepted = true;
+              savedDocId = savedData.docId;
             }
           }
         } catch (e) { console.warn('Could not parse ToS local storage', e); }
 
         if (isAlreadyAccepted) {
+          // Hide inputs and show download button for returning users
           if (tosSigInput && tosSigInput.parentElement) tosSigInput.parentElement.style.display = 'none';
-          if (tosAcceptBtn) tosAcceptBtn.style.display = 'none';
+
+          if (tosAcceptBtn) {
+            tosAcceptBtn.style.display = 'block';
+            tosAcceptBtn.disabled = false;
+            tosAcceptBtn.classList.add('btn-success');
+            tosAcceptBtn.innerText = 'Access Digital Copy';
+
+            // Re-attach download logic if data needs fetching
+            tosAcceptBtn.onclick = async () => {
+              if (signedData) {
+                generateTosPdf(signedData);
+              } else if (savedDocId) {
+                tosAcceptBtn.innerText = 'Fetching Contract...';
+                tosAcceptBtn.disabled = true;
+                const result = await window.getSignatureFromDatabase(savedDocId);
+                if (result.success) {
+                  signedData = result.data;
+                  generateTosPdf(signedData);
+                  tosAcceptBtn.innerText = 'Access Digital Copy';
+                  tosAcceptBtn.disabled = false;
+                } else {
+                  alert("Failed to retrieve contract from server. You may need to resign.");
+                  localStorage.removeItem('tos_acceptance_data');
+                  window.location.reload();
+                }
+              }
+            };
+          }
+
           if (tosCheckbox) {
             tosCheckbox.checked = true;
             tosCheckbox.disabled = true;
           }
         } else {
           hasScrolledTosToBottom = false;
+          if (tosSigInput && tosSigInput.parentElement) tosSigInput.parentElement.style.display = 'grid'; // Ensure grid on reset
+
           if (tosSigInput) {
-            if (tosSigInput.parentElement) tosSigInput.parentElement.style.display = 'block';
+            tosSigInput.disabled = false;
             tosSigInput.value = '';
+          }
+          if (tosEmailInput) {
+            tosEmailInput.disabled = false;
+            tosEmailInput.value = '';
           }
           if (tosCheckbox) {
             tosCheckbox.checked = false;
@@ -1134,6 +1293,9 @@ document.addEventListener('DOMContentLoaded', () => {
           if (tosAcceptBtn) {
             tosAcceptBtn.style.display = 'block';
             tosAcceptBtn.disabled = true;
+            tosAcceptBtn.classList.remove('btn-success');
+            tosAcceptBtn.innerText = 'Accept Terms';
+            tosAcceptBtn.onclick = null; // Reset to default listener check
           }
 
           // Defer validation slightly allowing DOM engine to render scrollHeight geometry accurately
