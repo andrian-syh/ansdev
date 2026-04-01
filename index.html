@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnS_Dev | Roblox Developer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/about.css">
+  <link rel="stylesheet" href="css/portfolio.css">
+  <link rel="stylesheet" href="css/services.css">
+  <link rel="stylesheet" href="css/contact.css">
+
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+
+<body>
+
+  <!-- Sleek iOS Glass Navigation Always On -->
+  <header id="site-header">
+    <div class="container nav-container">
+      <a href="#home" class="logo">AnS<span>_Dev</span></a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#reputation">Reviews</a></li>
+          <li><a href="#services">Services</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions" style="display: flex; align-items: center; gap: 1rem;">
+        <a href="#contact" class="btn btn-primary">Say Hello</a>
+
+        <!-- Unique Mobile Menu Toggle (Asymmetrical Lines) -->
+        <button class="mobile-toggle-btn" id="mobile-toggle-btn" aria-label="Toggle Menu">
+          <span class="toggle-line toggle-line-top"></span>
+          <span class="toggle-line toggle-line-bottom"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Glass Overlay Menu -->
+  <div class="mobile-glass-menu" id="mobile-glass-menu">
+    <div class="mobile-nav-container">
+      <a href="#home" class="mobile-nav-item active">Home</a>
+      <a href="#about" class="mobile-nav-item">About</a>
+      <a href="#portfolio" class="mobile-nav-item">Portfolio</a>
+      <a href="#reputation" class="mobile-nav-item">Reviews</a>
+      <a href="#services" class="mobile-nav-item">Services</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- Hybrid Layout Hero Section with Stats -->
+    <section id="home" class="hero-section">
+      <div class="container hero-container">
+
+        <!-- Top Half: Title (Left) + Avatar & Stats (Right) -->
+        <div class="hero-top-row">
+
+          <div class="hero-title-group">
+            <h1 class="hero-title" id="ui-profile-name">AnS_Dev</h1>
+            <div class="hero-subtitle">
+              <span class="typed-text"></span><span class="cursor"></span>
+            </div>
+          </div>
+
+          <!-- Column for profile and stats combined -->
+          <div class="hero-right-col">
+            <div class="hero-avatar-large">
+              <img id="ui-profile-avatar" src="assets/images/hero-img.jpg" alt="Profile">
+            </div>
+
+            <!-- Flexing Stats in a Pill -->
+            <div class="hero-stats-mini" id="ui-stats-container">
+              <!-- Akan di-generate otomatis oleh app.js melalui config.js -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Half: Centered Description + Social Pills -->
+        <div class="hero-bottom-group">
+          <p class="hero-desc" id="ui-profile-desc">
+            <!-- Akan di-generate otomatis oleh app.js melalui config.js -->
+          </p>
+
+          <div class="hero-social-actions">
+            <!-- Social Pill: Roblox -->
+            <a id="ui-social-roblox" href="#" target="_blank" class="social-pill" title="Roblox">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                <g transform="scale(5.12,5.12)">
+                  <path
+                    d="M12.125,1.99805c-0.43898,0.01834 -0.81457,0.32104 -0.92578,0.74609l-9.16602,34.83203c-0.06779,0.25668 -0.03074,0.52977 0.10298,0.75911c0.13372,0.22934 0.35314,0.3961 0.60991,0.46354l34.83398,9.16797c0.25668,0.06779 0.52977,0.03074 0.75911,-0.10298c0.22934,-0.13372 0.3961,-0.35314 0.46354,-0.60991l9.16602,-34.83398c0.06779,-0.25668 0.03074,-0.52977 -0.10298,-0.75911c-0.13372,-0.22934 -0.35314,-0.3961 -0.60991,-0.46354l-34.83398,-9.16602c-0.09674,-0.02587 -0.19681,-0.03706 -0.29687,-0.0332zM21.5,19l9.5,2.5l-2.5,9.5l-9.5,-2.5z">
+                  </path>
+                </g>
+              </svg>
+              Roblox
+            </a>
+
+            <!-- Social Pill: Discord -->
+            <a id="ui-social-discord" href="#" target="_blank" class="social-pill" title="Discord">
+              <i class="fab fa-discord"></i> Discord
+            </a>
+
+            <!-- Social Pill: LinkedIn -->
+            <a id="ui-social-linkedin" href="#" target="_blank" class="social-pill" title="LinkedIn">
+              <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section" style="padding: 5rem 0;">
+      <div class="container about-bento-grid">
+
+        <!-- Left: Image Card, Tags, & Download CV -->
+        <div class="glass-panel about-image-card">
+          <div class="about-img-wrapper">
+            <img id="ui-about-img" src="" alt="About Me">
+          </div>
+
+          <div class="about-skills-container" id="ui-about-skills">
+            <!-- Di-generate otomatis oleh app.js -->
+          </div>
+
+          <!-- Align ke bawah -->
+          <div class="about-action-btn" style="width: 100%; display: flex; justify-content: center;">
+            <a href="#" id="ui-about-cv" download class="btn btn-primary"
+              style="padding-left: 2rem; padding-right: 2rem;">Download CV</a>
+          </div>
+        </div>
+
+        <!-- Right: Text Description Card -->
+        <div class="glass-panel about-content-card">
+          <h4 class="section-eyebrow" id="ui-about-eyebrow"></h4>
+          <h2 class="section-title-modern" id="ui-about-title"></h2>
+
+          <div class="about-text-container" id="ui-about-paragraphs">
+            <!-- Di-generate otomatis oleh app.js -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Portfolio / Projects Marquee Section -->
+    <section id="portfolio" class="portfolio-section" style="padding: 5rem 0; overflow: hidden;">
+      <div class="container">
+
+        <!-- Header Controls -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+          <!-- Header Kiri -->
+          <div>
+            <h4 class="section-eyebrow">SHOWCASE</h4>
+            <h2 class="section-title-modern" style="margin-bottom: 0;">Selected Works</h2>
+          </div>
+
+          <!-- Link Kanan -->
+          <a href="projects.html" class="view-all-link">View all &rarr;</a>
+        </div>
+
+        <!-- Infinite Marquee Track Container -->
+        <div class="marquee-track-container" id="ui-marquee-viewport">
+          <div class="marquee-track" id="ui-portfolio-marquee-1">
+            <!-- Di-generate otomatis oleh app.js -->
+          </div>
+          <div class="marquee-track track-reverse" id="ui-portfolio-marquee-2" style="margin-top: 1.5rem;">
+            <!-- Di-generate otomatis oleh app.js -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Client Endorsements / Reputation Section -->
+    <section id="reputation" class="reputation-section" style="padding: 5rem 0;">
+      <div class="container">
+
+        <div style="text-align: center; margin-bottom: 3.5rem;">
+          <h4 class="section-eyebrow">ENDORSEMENTS</h4>
+          <h2 class="section-title-modern">Client Voices</h2>
+        </div>
+
+        <!-- Grid for Testimonials -->
+        <div class="testimonial-grid" id="ui-testimonial-grid">
+          <!-- Digenerate otomatis oleh app.js -->
+        </div>
+
+        <div class="view-more-container" id="ui-testimonial-actions"
+          style="text-align: center; margin-top: 3rem; display: none;">
+          <button class="btn btn-outline" id="btn-load-more-testimonials">Show More Voices</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Services / Rate Cards Section -->
+    <section id="services" class="services-section" style="padding: 5rem 0;">
+      <div class="container">
+
+        <div style="text-align: center; margin-bottom: 3.5rem;">
+          <h4 class="section-eyebrow">WHAT I OFFER</h4>
+          <h2 class="section-title-modern">Roblox Development Services</h2>
+          <p class="section-subtitle"
+            style="color: var(--text-muted); max-width: 600px; margin: 1rem auto 0; line-height: 1.6;">
+            Expert Luau scripting and game development solutions tailored to your project's vision. From minor tweaks to
+            full game systems, I provide quality and efficiency.
+          </p>
+        </div>
+
+        <!-- Unified Pricing Board for Services -->
+        <div class="pricing-board" id="ui-pricing-board">
+          <!-- Digenerate otomatis oleh app.js -->
+        </div>
+
+        <!-- Service Info Links (ToS, Payment) -->
+        <div class="service-info-links" id="ui-service-info-links">
+          <!-- Digenerate otomatis oleh app.js -->
+        </div>
+
+        <!-- Services Content is dynamically injected here... -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 6. CONTACT SECTION                         -->
+    <!-- ========================================== -->
+    <section id="contact" class="contact-section scroll-spy-section">
+      <div class="container contact-container">
+
+        <!-- Kolom Kiri: Contact Info & Socials -->
+        <div class="contact-info-panel">
+          <div class="contact-header">
+            <h4 class="section-subtitle">Let's Talk</h4>
+            <h2 class="section-title-modern">Ready to Build<br>Something <span class="text-gradient">Awesome?</span>
+            </h2>
+            <p>Whether you need a quick bug fix, an entirely new game system, or just want to discuss a potential
+              partnership, I'm always open to new adventures.</p>
+          </div>
+
+          <div class="contact-cards">
+            <!-- Email -->
+            <a href="mailto:mhmd.andriansyah07@gmail.com" class="contact-card-link">
+              <div class="contact-icon-box"><i class="fas fa-envelope"></i></div>
+              <div class="contact-text-box">
+                <h4>Email</h4>
+                <p>mhmd.andriansyah07@gmail.com</p>
+              </div>
+            </a>
+
+            <!-- Discord -->
+            <a href="https://discord.com/users/your_discord_id_here" target="_blank" class="contact-card-link">
+              <div class="contact-icon-box"><i class="fab fa-discord"></i></div>
+              <div class="contact-text-box">
+                <h4>Discord</h4>
+                <p>AnS_Dev#1234</p>
+              </div>
+            </a>
+
+            <!-- Roblox -->
+            <a href="https://www.roblox.com/users/your_roblox_id" target="_blank" class="contact-card-link">
+              <div class="contact-icon-box">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                  <path d="M5.4 0L0 20.2l18.6 3.8L24 3.8 5.4 0zm5.1 8.8l4.4.9-1.2 4.4-4.4-.9 1.2-4.4z" />
+                </svg>
+              </div>
+              <div class="contact-text-box">
+                <h4>Roblox Profile</h4>
+                <p>@AnS_Dev</p>
+              </div>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://instagram.com/andrian._syh" target="_blank" class="contact-card-link">
+              <div class="contact-icon-box"><i class="fab fa-instagram"></i></div>
+              <div class="contact-text-box">
+                <h4>Instagram</h4>
+                <p>@andrian._syh</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Kolom Kanan: The Glass Form -->
+        <div class="contact-form-wrapper">
+          <form id="premium-contact-form">
+            <div class="form-group">
+              <input type="text" id="contact-name" name="name" class="form-input" placeholder="Your Name" required>
+              <label for="contact-name" class="form-label">Your Name</label>
+            </div>
+
+            <div class="form-group">
+              <input type="email" id="contact-email" name="email" class="form-input" placeholder="Your Email" required>
+              <label for="contact-email" class="form-label">Your Email</label>
+            </div>
+
+            <div class="form-group textarea-group">
+              <textarea id="contact-message" name="message" class="form-input" placeholder="Project Details..." rows="4"
+                style="resize: none;" required></textarea>
+              <label for="contact-message" class="form-label">Project Details...</label>
+            </div>
+
+            <!-- ReCAPTCHA v2 (Dark Theme inside iframe via data-theme) -->
+            <div class="captcha-wrapper">
+              <div class="g-recaptcha" data-sitekey="6Lf6-j8rAAAAALozzBnYxIeJj6fZhQrH_UfMYrLN" data-theme="dark"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary form-submit-btn" id="contact-submit-btn">
+              <span>Send Transmission</span> <i class="fas fa-paper-plane"></i>
+            </button>
+
+            <!-- Success/Error Message Container -->
+            <div id="contact-status-msg" class="form-status"></div>
+          </form>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- === Glassmorphism Project Modal === -->
+  <div class="project-modal-overlay" id="project-modal">
+    <div class="glass-panel project-modal-content">
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Close">&times;</button>
+
+      <div class="modal-body">
+        <!-- Left: Image -->
+        <div class="modal-img-wrapper">
+          <img id="modal-img" src="" alt="Project">
+        </div>
+
+        <!-- Right: Text Content -->
+        <div class="modal-info">
+          <div class="modal-header-text">
+            <h2 id="modal-title" class="section-title-modern" style="margin-bottom: 0.5rem; font-size: 2.2rem;">Title
+            </h2>
+            <div id="modal-tags" class="about-skills-container"
+              style="justify-content: flex-start; margin-bottom: 1.5rem;"></div>
+          </div>
+
+          <div class="modal-scroll-area">
+            <h4 class="modal-subheading">About the Project</h4>
+            <p id="modal-desc" class="modal-p-text"></p>
+
+            <h4 class="modal-subheading" style="margin-top: 1.5rem;">My Contributions</h4>
+            <ul id="modal-contributions" class="modal-list"></ul>
+          </div>
+
+          <div class="modal-actions" style="margin-top: 2rem;">
+            <a href="#" id="modal-link" target="_blank" class="btn btn-primary" style="width: 100%;">Play on Roblox</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- === General Info Modal (ToS, Payments) === -->
+  <div class="project-modal-overlay" id="info-modal">
+    <div class="glass-panel project-modal-content" style="max-width: 650px; text-align: left; padding: 2.5rem;">
+      <button class="modal-close-btn" id="info-modal-close-btn">&times;</button>
+      <div class="modal-body" style="display: block;"> <!-- Override any grid from existing styles if necessary -->
+        <h2 id="info-modal-title" style="margin-bottom: 1.5rem; color: var(--primary-glow); font-size: 1.6rem;">Title
+        </h2>
+        <div id="info-modal-content"
+          style="color: rgba(255,255,255,0.85); font-size: 0.95rem; line-height: 1.7; max-height: 60vh; overflow-y: auto;">
+          <!-- Content injected here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clean Footer Section -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-links">
+        <a href="#home">Home</a><span class="dot">&middot;</span>
+        <a href="#about">About</a><span class="dot">&middot;</span>
+        <a href="#portfolio">Portfolio</a><span class="dot">&middot;</span>
+        <a href="#reputation">Reviews</a><span class="dot">&middot;</span>
+        <a href="#services">Services</a>
+      </div>
+      <p class="footer-copyright">
+        &copy; <span id="current-year">20XX </span> AnS_Dev. All rights reserved.
+      </p>
+      <p class="footer-disclaimer">
+        Roblox Game Developer & Luau Scripter
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>

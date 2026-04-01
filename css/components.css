@@ -1,0 +1,326 @@
+/* UI Components */
+
+/* --- Clean Glassmorphism --- */
+.glass-panel {
+  background: rgba(8, 11, 25, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+  padding: 1.5rem;
+}
+
+.glass-panel:hover {
+  background: rgba(8, 11, 25, 0.35);
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+/* --- Navigation Bar --- */
+/* iOS-style Frosted Glass Effect Always On */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+
+  background: rgba(7, 9, 15, 0.35);
+  /* Transparency */
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+  transition: all var(--transition-normal);
+}
+
+/* Optional slight darkening on scroll, handled smoothly */
+header.scrolled {
+  background: rgba(7, 9, 15, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.logo {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+}
+
+.logo span {
+  color: var(--primary-glow);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.nav-links a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color var(--transition-normal);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--text-main);
+}
+
+/* Basic Responsive Nav CSS */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+}
+
+/* --- Mobile Menu Toggle (Unique Asymmetrical Style) --- */
+.mobile-toggle-btn {
+  display: none;
+  /* Hidden on desktop */
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  /* Align right */
+  gap: 6px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  /* Slight pill shape for button */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  /* Circle button */
+  cursor: pointer;
+  z-index: 2000;
+  /* Above overlay */
+  transition: all 0.3s ease;
+  padding: 0 10px;
+}
+
+.mobile-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.toggle-line {
+  display: block;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  /* Bouncy transition */
+}
+
+/* Top line is longer */
+.toggle-line-top {
+  width: 100%;
+}
+
+/* Bottom line is shorter */
+.toggle-line-bottom {
+  width: 60%;
+}
+
+/* Active Menu State for Toggle */
+.mobile-toggle-btn.active .toggle-line-top {
+  transform: translateY(4px) rotate(45deg);
+  width: 100%;
+}
+
+.mobile-toggle-btn.active .toggle-line-bottom {
+  transform: translateY(-4px) rotate(-45deg);
+  width: 100%;
+  /* Expands to match */
+}
+
+/* --- Mobile Glass Overlay Menu --- */
+.mobile-glass-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(5, 8, 18, 0.85);
+  /* Dark tint */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 1500;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(-20px);
+  /* Slight slide down effect */
+}
+
+.mobile-glass-menu.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.mobile-nav-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: center;
+}
+
+.mobile-nav-item {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: -1px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.mobile-nav-item:hover,
+.mobile-nav-item.active {
+  color: #fff;
+  transform: scale(1.05);
+  /* Modern scaling */
+}
+
+/* Show toggle on mobile screens */
+@media (max-width: 900px) {
+  .mobile-toggle-btn {
+    display: flex;
+  }
+}
+
+/* --- Footer --- */
+.site-footer {
+  padding: 4rem 0 2rem;
+  background: transparent;
+  border-top: none;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-normal);
+}
+
+.footer-links a:hover {
+  color: var(--primary);
+}
+
+.footer-links .dot {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.9rem;
+}
+
+.footer-copyright {
+  color: var(--text-main);
+  font-size: 0.85rem;
+}
+
+.footer-disclaimer {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+/* --- Buttons & Pills --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all var(--transition-normal);
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--primary);
+  /* Solid blue */
+  border-color: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  /* Subtle matching glow */
+  font-weight: 700;
+}
+
+.btn-primary:hover {
+  background: #2563eb;
+  /* Slightly darker/vibrant */
+  border-color: #2563eb;
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+  /* Stronger glow */
+  transform: translateY(-1px);
+}
+
+/* --- Social Pills --- */
+.social-pill {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-pill);
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  gap: 0.6rem;
+  transition: all var(--transition-normal);
+  text-decoration: none;
+}
+
+.social-pill:hover {
+  border-color: var(--border-glow);
+  background: rgba(59, 130, 246, 0.05);
+  /* very faint primary tint */
+  color: var(--text-main);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15);
+}
+
+.social-pill svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.social-pill i {
+  font-size: 14px;
+}
