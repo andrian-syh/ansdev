@@ -802,9 +802,29 @@ document.addEventListener('DOMContentLoaded', () => {
         // Fetch user IP details securely
         const ipData = await fetchClientIPMetadata();
 
+        // Retrieve ToS version from CONFIG (defined in config.js)
+        const tosConfig = (typeof CONFIG !== 'undefined' && CONFIG.serviceInfo) 
+          ? CONFIG.serviceInfo.find(i => i.id === 'tos') 
+          : null;
+        const tosVersion = tosConfig ? (tosConfig.version || 'v1.0') : 'v1.0';
+
+        // Enhanced metadata collection for audit log
+        const auditLogData = {
+          ...ipData,
+          tosVersion: tosVersion,
+          browser: navigator.userAgent,
+          platform: navigator.platform,
+          language: navigator.language,
+          resolution: `${window.screen.width}x${window.screen.height}`,
+          viewport: `${window.innerWidth}x${window.innerHeight}`,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          referrer: document.referrer || 'Direct',
+          pageUrl: window.location.href
+        };
+
         // Attempt Firestore save
         if (typeof window.saveSignatureToDatabase === 'function') {
-          const result = await window.saveSignatureToDatabase(signature, ipData);
+          const result = await window.saveSignatureToDatabase(signature, auditLogData);
           if (!result || !result.success) {
             console.error("Firestore save failed.");
             alert('Failed to save your agreement. Please try again.');
@@ -821,8 +841,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log("ToS fully accepted and signed by:", signature);
 
-        // Set complex persistent flag: timestamp and modal version (from header subtitle)
-        const tosVersion = infoModalSubtitle ? infoModalSubtitle.textContent : '';
+        // Set complex persistent flag for local tracking
         const acceptanceData = {
           accepted: true,
           timestamp: Date.now(),

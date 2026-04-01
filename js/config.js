@@ -189,7 +189,7 @@ const CONFIG = {
       btnLabel: "Level Up Game",
       features: [
         "DataStore Integration",
-        "MessagingService Logic",
+        "Services Logic",
         "Code Refactoring/Cleanup",
         "Shop & Inventory UI",
         "Round-Based Game Loops",
@@ -223,9 +223,34 @@ const CONFIG = {
       id: "tos",
       text: "Terms of Service",
       title: "Terms of Service",
-      subtitle: "Last updated: April 01, 2026",
+      subtitle: "Last updated: April 2026",
+      version: "v1.0",
       icon: "fas fa-file-contract",
       sections: [
+        {
+          label: "Agreement",
+          icon: "fas fa-file-signature",
+          content: `
+            <ul style="list-style: disc; margin-left: 1.5rem;">
+              <li style="margin-bottom: 0.8rem;"><strong>Binding Acceptance:</strong> By typing your signature, checking the agreement box, and clicking "Accept Terms," you (The Client) provide an electronic signature that carries the same legal weight and enforceability as a handwritten signature.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Electronic Record Keeping:</strong> You acknowledge and consent that my system will log your metadata (IP address, timestamp, browser info, and ToS version) as definitive evidence of your acceptance. This digital record shall be admissible in any legal proceeding, payment dispute, or platform-specific arbitration (e.g., PayPal Resolution Center or Roblox DMCA appeals).</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Non-Repudiation:</strong> Once the "Accept Terms" button is clicked, you waive any right to claim that this agreement is invalid or was not signed by you, provided the metadata matches your digital footprints at the time of the transaction.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Final Authority (Superseding Clause):</strong> This Terms of Service (ToS) document serves as the final and only source of truth. It nullifies all prior verbal discussions or casual text messages made before the deposit. Any specific promises must be explicitly written in the final project brief.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Age & Financial Representation:</strong> You warrant that you are of legal age (or have guardian consent) and are the authorized owner of the funds used. You waive your right to initiate a chargeback for digital labor once development has commenced.</li>
+            </ul>
+          `
+        },
+        {
+          label: "Ethics",
+          icon: "fas fa-gavel",
+          content: `
+            <ul style="list-style: disc; margin-left: 1.5rem;">
+              <li style="margin-bottom: 0.8rem;"><strong>Platform Compliance:</strong> I strictly do not accept projects that violate Roblox’s Terms of Use or Community Standards. This includes, but is not limited to, unauthorized gambling systems, "condo" or adult-themed content, and extremist or hate-speech related materials.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Legal & Moral Boundaries:</strong> I reserve the right to decline any project that involves scams, phishing, illegal activities, or content that promotes harassment and social harm.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Right of Refusal & Termination:</strong> If a project is found to have a hidden malicious intent after development has begun (e.g., a "backdoor" for stealing assets or deceptive monetization), I will terminate the project immediately. In such cases, the upfront payment is <strong>non-refundable</strong> due to the breach of ethical terms.</li>
+            </ul>
+          `
+        },
         {
           label: "Project Scope",
           icon: "fas fa-crosshairs",
@@ -314,17 +339,6 @@ const CONFIG = {
               <li style="margin-bottom: 0.8rem;"><strong>Client-Initiated Cancellation:</strong> If you decide to cancel the project at any point after development has begun, the initial down payment is entirely forfeit and non-refundable.</li>
               <li style="margin-bottom: 0.8rem;"><strong>Developer-Initiated Cancellation:</strong> If I am forced to cancel the project due to unforeseen real-life emergencies or unavoidable schedule conflicts, you will receive a pro-rated refund reflecting the amount of unfinished work, alongside the current progress of the source code. However, if I terminate the project due to a breach of ToS, extreme scope creep without renegotiation, or a hostile work environment (e.g., harassment, insults), development will cease immediately, and no refund will be provided.</li>
               <li style="margin-bottom: 0.8rem;"><strong>Project Dormancy & Ghosting:</strong> Consistent communication is vital. If I require your feedback, approval, or assets to proceed, and you fail to respond for 14 consecutive days, the project will be temporarily frozen. A final 48-hour warning will be sent. If unheeded, the project is officially declared abandoned, all deposits are forfeited, and resuming the work at a later date will require a "Reactivation Fee" or a complete requote, subject to my availability.</li>
-            </ul>
-          `
-        },
-        {
-          label: "Ethics",
-          icon: "fas fa-gavel",
-          content: `
-            <ul style="list-style: disc; margin-left: 1.5rem;">
-              <li style="margin-bottom: 0.8rem;"><strong>Platform Compliance:</strong> I strictly do not accept projects that violate Roblox’s Terms of Use or Community Standards. This includes, but is not limited to, unauthorized gambling systems, "condo" or adult-themed content, and extremist or hate-speech related materials.</li>
-              <li style="margin-bottom: 0.8rem;"><strong>Legal & Moral Boundaries:</strong> I reserve the right to decline any project that involves scams, phishing, illegal activities, or content that promotes harassment and social harm.</li>
-              <li style="margin-bottom: 0.8rem;"><strong>Right of Refusal & Termination:</strong> If a project is found to have a hidden malicious intent after development has begun (e.g., a "backdoor" for stealing assets or deceptive monetization), I will terminate the project immediately. In such cases, the upfront payment is <strong>non-refundable</strong> due to the breach of ethical terms.</li>
             </ul>
           `
         },
