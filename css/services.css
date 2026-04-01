@@ -295,3 +295,290 @@
     display: none;
   }
 }
+
+/* ============================
+   Split-Panel Info Modal
+   ============================ */
+.info-modal-panel {
+  width: 90%;
+  max-width: 920px;
+  height: 85vh;               /* Explicit fixed height anchors internal scroll areas */
+  max-height: 800px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 0;
+  transform: scale(0.95) translateY(20px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.project-modal-overlay.open .info-modal-panel {
+  transform: scale(1) translateY(0);
+}
+
+.info-modal-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  flex: 1;                    /* Takes the full height of the flex-panel */
+  min-height: 0;              /* Prevents children from breaking flex constraint */
+}
+
+/* --- Left Sidebar --- */
+.info-modal-sidebar {
+  background: rgba(5, 8, 18, 0.6);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;           /* Scrollable horizontally */
+  min-height: 0;
+}
+
+.info-modal-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Sidebar Navigation Item */
+.info-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.5rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-weight: 500;
+  border: none;
+  background: transparent;
+  text-align: left;
+  width: 100%;
+  transition: all 0.2s ease;
+  position: relative;
+  border-left: 3px solid transparent;
+}
+
+.info-nav-item i {
+  font-size: 0.85rem;
+  width: 20px;
+  text-align: center;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+}
+
+.info-nav-item:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.info-nav-item:hover i {
+  opacity: 1;
+}
+
+/* Active State — Highlighted sidebar item */
+.info-nav-item.active {
+  color: var(--primary-glow);
+  background: rgba(59, 130, 246, 0.08);
+  border-left-color: var(--primary);
+  font-weight: 600;
+}
+
+.info-nav-item.active i {
+  opacity: 1;
+  color: var(--primary-glow);
+}
+
+/* Active indicator dot */
+.info-nav-item.active::after {
+  content: "";
+  position: absolute;
+  right: 1rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 8px var(--primary);
+}
+
+/* --- Right Content Panel --- */
+.info-modal-main {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;              /* Crucial for flex scrolling inside grid */
+}
+
+.info-modal-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;             /* Prevent header from squishing */
+}
+
+.info-modal-header h2 {
+  color: var(--primary-glow);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.info-modal-subtitle {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+/* Scrollable content area */
+.info-modal-content-area {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+/* Custom scrollbar for content area */
+.info-modal-content-area::-webkit-scrollbar {
+  width: 5px;
+}
+
+.info-modal-content-area::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+}
+
+.info-modal-content-area::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.3);
+  border-radius: 10px;
+}
+
+.info-modal-content-area::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.5);
+}
+
+/* Individual content section card */
+.info-section-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.info-section-card:hover {
+  background: rgba(59, 130, 246, 0.04);
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.info-section-card.active-card {
+  background: rgba(59, 130, 246, 0.06);
+  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.08);
+}
+
+.info-section-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.8rem;
+}
+
+.info-section-card-header i {
+  color: var(--primary);
+  font-size: 1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.info-section-card-header strong {
+  color: var(--text-main);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.info-section-card-body {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Styling lists inside the section content to look elegant */
+.info-section-card-body ul,
+.info-section-card-body ol {
+  padding-left: 0;
+  margin-left: 1.1rem;
+}
+
+.info-section-card-body li {
+  margin-bottom: 0.8rem;
+  position: relative;
+}
+
+/* Sub-titles or accents in the body */
+.info-section-card-body strong {
+  color: #fff;
+}
+
+/* --- Responsive / Mobile --- */
+@media (max-width: 700px) {
+  .info-modal-panel {
+    width: 95%;
+    height: 90vh;
+    max-height: 700px;
+  }
+
+  .info-modal-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .info-modal-sidebar {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 1rem 0;
+    max-height: 180px;         /* Specific constraint on mobile */
+    overflow-y: auto;
+  }
+
+  .info-modal-sidebar-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0;
+    padding: 0 1rem;
+  }
+
+  .info-nav-item {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    border-left: none;
+    border-bottom: 2px solid transparent;
+    flex: 0 0 auto;
+  }
+
+  .info-nav-item.active {
+    border-left-color: transparent;
+    border-bottom-color: var(--primary);
+  }
+
+  .info-nav-item.active::after {
+    display: none;
+  }
+
+  .info-modal-main {
+    padding: 1.5rem;
+  }
+
+  .info-modal-content-area {
+    width: 100%;
+    max-height: unset; /* Relies on flex constraint */
+  }
+}

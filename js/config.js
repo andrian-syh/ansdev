@@ -142,94 +142,208 @@ const CONFIG = {
   services: [
     {
       id: "basic-scripting",
-      title: "Basic Scripting",
+      title: "Quick Fixes",
       icon: "fas fa-bolt",
       price: {
-        default: "$30 - $150",
-        ID: "IDR 400 Ribu - IDR 2.3 Juta"
+        default: "Start at $10",
+        ID: "Start at IDR 100K"
       },
       recommended: false,
       btnLabel: "Start Simple",
       features: [
-        "Quick Bug Fixes",
-        "Interactive UI/UX",
-        "Basic Asset Integration"
+        "Minor Bug Squashing",
+        "UI Button Logic",
+        "Simple Tween Animations",
+        "Tool & Item Setup",
+        "Basic Givers & Doors",
+        "Asset/Model Integration",
       ]
     },
     {
       id: "advanced-mechanics",
-      title: "Advanced Mechanics",
+      title: "Core Systems",
       icon: "fas fa-code-branch",
       price: {
-        default: "$150 - $750",
-        ID: "IDR 2.3 Juta - IDR 11.5 Juta"
+        default: "Start at $80",
+        ID: "Start at IDR 800K"
       },
       recommended: true,
       btnLabel: "Level Up Game",
       features: [
-        "Core Gameplay Systems",
-        "Saving & Leaderboards",
-        "Advanced UI/UX Systems",
-        "Clean Modular Code"
+        "DataStore Integration",
+        "MessagingService Logic",
+        "Code Refactoring/Cleanup",
+        "Shop & Inventory UI",
+        "Round-Based Game Loops",
+        "Custom Leaderboards",
       ]
     },
     {
       id: "custom-solutions",
-      title: "Custom Solutions",
+      title: "Full Projects",
       icon: "fas fa-hands-helping",
       price: {
-        default: "$800+ / Quote",
-        ID: "IDR 12 Juta+ / Quote"
+        default: "$400+ / Quote",
+        ID: "IDR 6.500K+ / Quote"
       },
       recommended: false,
       btnLabel: "Request Project",
       features: [
-        "Full Custom Game Build",
-        "Full Game Optimization",
-        "Long-Term Partnership"
+        "From-Scratch Development",
+        "Deep Server Optimization",
+        "Full UI/UX Implementation",
+        "Massive Code Refactoring",
+        "Long-Term Maintenance",
+        "Large-Scale Game Logic",
       ]
     }
   ],
+  // Service Information Entries — Each entry contains navigable sub-sections
   serviceInfo: [
     {
       id: "tos",
       text: "Terms of Service",
       title: "Terms of Service",
-      content: `
-        <ul style="list-style: disc; margin-left: 1.5rem; margin-bottom: 1rem;">
-          <li style="margin-bottom: 0.8rem;"><strong>Payment Upfront:</strong> A 50% non-refundable down payment is strictly required before any development begins to secure your slot and prevent project abandonment.</li>
-          <li style="margin-bottom: 0.8rem;"><strong>Revisions & Bugs:</strong> Free bug patches and minor tweaks are guaranteed for 7 days after the final product is delivered. Major feature requests or out-of-scope revisions will incur additional hourly/flat charges.</li>
-          <li style="margin-bottom: 0.8rem;"><strong>Code Ownership:</strong> All commercial rights, source code, and assets are officially transferred to the client only <em>after</em> the final 50% payment is cleared.</li>
-          <li style="margin-bottom: 0.8rem;"><strong>Cancellations:</strong> If the project is cancelled by the client when development is over 50% complete, no refunds will be issued.</li>
-        </ul>
-      `
+      subtitle: "Last updated: April 2026",
+      icon: "fas fa-file-contract",
+      sections: [
+        {
+          label: "Payment Upfront",
+          icon: "fas fa-money-bill-wave",
+          content: "A 50% non-refundable down payment is strictly required to secure your slot and commence development. The remaining 50% balance must be cleared upon project completion, prior to the handover of the final place/file."
+        },
+        {
+          label: "Scope of Work",
+          icon: "fas fa-clipboard-list",
+          content: `
+            <ul style="list-style: disc; margin-left: 1.5rem;">
+              <li style="margin-bottom: 0.8rem;"><strong>General Scope:</strong> Development is strictly based on the initially agreed-upon brief or Game Design Document (GDD). Any new mechanics, UI changes, or feature requests made after development has started will be quoted and billed as a separate task.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Rushed Deadlines:</strong> The initial deadline is mutually agreed upon before the down payment. Any subsequent requests to significantly expedite the delivery date will be evaluated based on my current availability. Such requests will incur an additional "Rush Fee" (25%-50% of the total quote) or may be respectfully declined to maintain the quality of the work.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Confidentiality & Portfolio Rights:</strong> Your game ideas, mechanics, and unreleased content are kept strictly confidential during development. However, I reserve the right to display visual snippets, screenshots, or video demonstrations of the completed systems in my personal portfolio <i>only after</i> the project has been officially released to the public or explicitly approved by you.</li>
+            </ul>
+          `
+        },
+        {
+          label: "Revisions & Bugs",
+          icon: "fas fa-bug",
+          content: `
+            <ul style="list-style: disc; margin-left: 1.5rem;">
+              <li style="margin-bottom: 0.8rem;"><strong>Post-Delivery Warranty:</strong> I provide a 7-day warranty post-delivery for minor bug patches and logical tweaks related to the original scope. Major feature modifications or out-of-scope revisions will incur additional flat or hourly charges.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Bug vs. Feature:</strong> A "bug" is strictly defined as code that produces errors or fails to function as explicitly outlined in the initial brief. Changes to the logic, visual design, or overall "feel" of a mechanic after it has been approved are classified as revisions—not bug fixes—and may be billed separately.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Long-Term Maintenance & Roblox Updates:</strong> After the 7-day warranty expires, the project is considered finalized. Any future breakages caused by official Roblox engine updates, API deprecations, or modifications made by other scripters are not covered under free support. Fixing these issues will require a new commission or a separate maintenance contract.</li>
+            </ul>
+          `
+        },
+        {
+          label: "Code Ownership",
+          icon: "fas fa-key",
+          content: `
+            <ul style="list-style: disc; margin-left: 1.5rem;">
+              <li style="margin-bottom: 0.8rem;"><strong>Rights Transfer:</strong> All commercial rights, source code, and assets remain my property during development. Complete ownership is officially transferred to the client only after the final 50% payment is fully cleared.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Testing Security:</strong> All playtesting will be conducted in a heavily secured, server-sided environment owned by me. No edit access, Team Create invitations, or uncopylocked files will be provided until the final payment is cleared. Any attempt to exploit or steal assets during the testing phase will result in immediate project termination without a refund.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Anti-Reselling & Distribution:</strong> The final scripts, systems, and UI configurations are strictly licensed for use in your specific game or studio only. Reselling, leaking, open-sourcing, or distributing my code to third parties without explicit written permission is strictly prohibited and will result in a DMCA takedown.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Attribution & White-Label Service:</strong> In-game crediting (such as in the game's description or UI) is entirely optional and left to your discretion. By default, I retain the right to showcase visual snippets or video demonstrations of the completed systems in my personal portfolio after the game is publicly released. If you require a strict Non-Disclosure Agreement (NDA) or a "White-Label" service—meaning I am completely prohibited from claiming, discussing, or showcasing the work publicly anywhere—an additional privacy fee (e.g., 20% of the total quote) will be applied to the final invoice.</li>
+            </ul>
+          `
+        },
+        {
+          label: "Cancellations",
+          icon: "fas fa-ban",
+          content: `
+            <ul style="list-style: disc; margin-left: 1.5rem;">
+              <li style="margin-bottom: 0.8rem;"><strong>Client Cancellations:</strong> If the project is cancelled by the client after development has begun, the 50% down payment is strictly non-refundable as it covers initial time, research, and labor.</li>
+              <li><strong>Developer Cancellations:</strong>
+                <ul style="list-style: circle; margin-left: 1.5rem; margin-top: 0.5rem;">
+                  <li style="margin-bottom: 0.5rem;"><strong>Due to Unforeseen Circumstances:</strong> If I must cancel the project due to unavoidable schedule conflicts, emergencies, or an inability to meet the standard of quality required, you will receive a 100% full refund of your down payment.</li>
+                  <li><strong>Due to Client Breach:</strong> If the project is terminated on my end due to client hostility, extreme scope creep without renegotiation, or violation of these terms, development will cease and the 50% down payment remains non-refundable.</li>
+                  <li><strong>Project Dormancy:</strong> If the client fails to respond or provide necessary assets for more than 14 consecutive days without prior notice, the project will be considered abandoned. The down payment will be forfeited, and resuming the work will require a new schedule slot.</li>
+                </ul>
+              </li>
+            </ul>
+          `
+        },
+        {
+          label: "Communication",
+          icon: "fas fa-comments",
+          content: "Regular progress updates will be provided. Please allow up to 24-48 hours for responses to inquiries, as development schedules are balanced alongside other daily commitments. Constant spamming or rushing will not be tolerated."
+        },
+        {
+          label: "Client Responsibilities",
+          icon: "fas fa-user-check",
+          content: `
+            <ul style="list-style: disc; margin-left: 1.5rem;">
+              <li style="margin-bottom: 0.8rem;"><strong>Asset Provision:</strong> Unless explicitly agreed otherwise, the client is solely responsible for providing all necessary 3D models, meshes, sound effects, and specific external graphic assets required for the script integration.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Asset Liability:</strong> The client guarantees that all 3D models, audio, UI graphics, or concepts provided for integration are original, legally acquired, and fully comply with Roblox's Terms of Use. I am not liable for any moderation actions or account strikes taken against games utilizing client-provided assets.</li>
+            </ul>
+          `
+        }
+      ]
     },
     {
       id: "payments",
-      text: "Accepted Payments",
-      title: "Payment Methods",
-      content: `
-        <ul style="list-style: disc; margin-left: 1.5rem; margin-bottom: 1rem;">
-          <li style="margin-bottom: 0.8rem;"><strong>Robux (Group Funds):</strong> Preferred method. No tax deductions apply.</li>
-          <li style="margin-bottom: 0.8rem;"><strong>Robux (T-Shirt/Gamepass):</strong> Accepted, but the client must cover the 30% Roblox marketplace fee.</li>
-          <li style="margin-bottom: 0.8rem;"><strong>PayPal (International):</strong> Accepted for international clients. Conversion rates to USD apply.</li>
-          <li style="margin-bottom: 0.8rem;"><strong>Bank Transfer & E-Wallet (ID Only):</strong> For Indonesian clients, local bank transfers (BCA, Mandiri) and E-Wallets (OVO, Dana, GoPay) are accepted at standard IDR rates.</li>
-        </ul>
-      `
+      text: "Payment Details",
+      title: "Payment Details",
+      subtitle: "Secure & Flexible Options",
+      icon: "fas fa-credit-card",
+      sections: [
+        {
+          label: "General Terms",
+          icon: "fas fa-file-invoice-dollar",
+          content: `
+            <ul style="list-style: disc; margin-left: 1.5rem;">
+              <li style="margin-bottom: 0.8rem;"><strong>Payment Structure:</strong> A 50% non-refundable down payment is required to secure your slot and commence work, with the remaining 50% due upon project completion prior to the final handover.</li>
+              <li><strong>Currency:</strong> Quotes are primarily provided in USD or IDR.</li>
+            </ul>
+          `
+        },
+        {
+          label: "Accepted Methods",
+          icon: "fas fa-wallet",
+          content: `
+            <ul style="list-style: disc; margin-left: 1.5rem;">
+              <li style="margin-bottom: 0.8rem;"><strong>Robux (Group Funds):</strong> Preferred method for Robux. No tax deductions apply. <em>(Note: Roblox requires users to be in a group for 14 days before receiving payouts)</em>.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Robux (T-Shirt/Gamepass):</strong> Accepted, but the client must cover the 30% Roblox marketplace fee. The final payment amount must be adjusted to ensure the net payout matches the agreed-upon quote.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Wise (Preferred for International):</strong> Highly recommended for international clients. It offers transparent exchange rates and lower transfer fees. Payments are sent directly to my local bank account.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>PayPal:</strong> Accepted for international clients. Please note that the client is strictly responsible for covering any additional PayPal transaction fees (e.g., Goods & Services fee) so that the received net amount is exact.</li>
+              <li><strong>Bank Transfer & E-Wallet (Indonesia Only):</strong> Local transfers via BCA, BRI, Jago, DANA, and GoPay are accepted for domestic clients using standard IDR pricing.</li>
+            </ul>
+          `
+        }
+      ]
     },
     {
       id: "process",
       text: "Work Process & Guidelines",
       title: "How I Work",
-      content: `
-        <ol style="list-style: decimal; margin-left: 1.5rem; margin-bottom: 1rem;">
-          <li style="margin-bottom: 0.8rem;"><strong>Consultation:</strong> We discuss your game's vision, specific mechanics, and negotiate a clear deadline and quote.</li>
-          <li style="margin-bottom: 0.8rem;"><strong>Down Payment:</strong> You provide the 50% upfront payment, and I will strictly lock my schedule for your project.</li>
-          <li style="margin-bottom: 0.8rem;"><strong>Development & Updates:</strong> I begin programming in a private baseplate. You will receive progress updates (videos/screenshots) at least twice a week via Discord.</li>
-          <li style="margin-bottom: 0.8rem;"><strong>Testing Phase:</strong> You will be invited to a testing place to try out the mechanics firsthand and point out any necessary adjustments.</li>
-          <li style="margin-bottom: 0.8rem;"><strong>Handover:</strong> Upon your satisfaction and the transfer of the final 50% payment, I will deliver the uncopylocked <code>.rbxl</code> file or directly insert the assets into your team-create place.</li>
-        </ol>
-      `
+      subtitle: "From Vision to Deployment",
+      icon: "fas fa-project-diagram",
+      sections: [
+        {
+          label: "Consultation & Planning",
+          icon: "fas fa-handshake",
+          content: "We will discuss your game's vision, specific mechanics, and finalize a clear deadline and quote. Providing a detailed brief, Game Design Document (GDD), and any ready-to-use assets (3D models/UI) upfront is highly recommended to ensure an accurate timeline and avoid misunderstandings."
+        },
+        {
+          label: "Down Payment & Scheduling",
+          icon: "fas fa-file-invoice-dollar",
+          content: "Once the 50% upfront payment is secured, I will officially lock your project into my schedule. This guarantees dedicated development time and prevents your slot from being taken by other client inquiries."
+        },
+        {
+          label: "Development & Updates",
+          icon: "fas fa-code",
+          content: "Development begins on a secure, private baseplate. To keep you consistently in the loop while maintaining a highly focused coding workflow, I will provide comprehensive progress updates (videos/screenshots) at least twice a week via Discord or our mutually agreed communication platform."
+        },
+        {
+          label: "Testing & Feedback",
+          icon: "fas fa-vial",
+          content: "You will be invited to a live testing place to experience the mechanics firsthand. During this phase, you can point out necessary adjustments or bug fixes to ensure the final product meets your expectations (adjustments must remain within the originally agreed-upon scope)."
+        },
+        {
+          label: "Final Payment & Handover",
+          icon: "fas fa-box-open",
+          content: "Once you are fully satisfied with the final product and the remaining 50% balance is cleared, I will officially transfer the uncopylocked .rbxl file or securely integrate the scripts and native UI directly into your Team Create place."
+        }
+      ]
     }
   ]
 };

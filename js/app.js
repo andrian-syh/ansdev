@@ -708,22 +708,127 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 8. INFO MODAL LOGIC (ToS, Payments, etc)
+    // 8. SPLIT-PANEL INFO MODAL (ToS, Payments, Process)
     // ==========================================
     const infoModal = document.getElementById('info-modal');
     const infoCloseBtn = document.getElementById('info-modal-close-btn');
+    const infoModalNav = document.getElementById('info-modal-nav');
+    const infoModalTitle = document.getElementById('info-modal-title');
+    const infoModalSubtitle = document.getElementById('info-modal-subtitle');
+    const infoModalContent = document.getElementById('info-modal-content');
+
+    // Scroll Spy state trackers
+    let isScrollingFromClick = false;
+    let scrollTimeout;
+
+    // Attach Scroll listener to independently scrollable content area
+    if (infoModalContent) {
+      infoModalContent.addEventListener('scroll', () => {
+        // Suspend scroll spy during click-triggered smooth scroll
+        if (isScrollingFromClick) return;
+
+        const cards = infoModalContent.querySelectorAll('.info-section-card');
+        if (!cards.length) return;
+
+        let currentActiveIndex = 0;
+
+        cards.forEach((card, index) => {
+          const cardRect = card.getBoundingClientRect();
+          const containerRect = infoModalContent.getBoundingClientRect();
+          // Calculate distance from the top of the container
+          const offsetTop = cardRect.top - containerRect.top;
+
+          // If the card reaches the upper third of the viewport, snap active state
+          if (offsetTop <= 150) {
+            currentActiveIndex = index;
+          }
+        });
+
+        // Update nav items without hijacking scroll
+        if (infoModalNav) {
+          infoModalNav.querySelectorAll('.info-nav-item').forEach((btn, idx) => {
+            if (idx === currentActiveIndex) {
+              btn.classList.add('active');
+              
+              // Ensure the selected sidebar item stays visible in the sidebar's own scroll context
+              const btnRect = btn.getBoundingClientRect();
+              const sidebarRect = infoModalNav.parentElement.getBoundingClientRect();
+              if (btnRect.bottom > sidebarRect.bottom || btnRect.top < sidebarRect.top) {
+                btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              }
+            } else {
+              btn.classList.remove('active');
+            }
+          });
+        }
+
+        // Apply glow highlights to the active card
+        cards.forEach((c, idx) => {
+          c.classList.toggle('active-card', idx === currentActiveIndex);
+        });
+      });
+    }
 
     window.openInfoModal = function(infoObj) {
-      if (!infoModal) return;
-      
-      const titleElem = document.getElementById('info-modal-title');
-      const contentElem = document.getElementById('info-modal-content');
-      
-      if (titleElem) titleElem.textContent = infoObj.title || infoObj.text;
-      if (contentElem) contentElem.innerHTML = infoObj.content || "<p>Information not available.</p>";
-      
+      if (!infoModal || !infoObj || !infoObj.sections) return;
+
+      // Populate header
+      if (infoModalTitle) infoModalTitle.textContent = infoObj.title || infoObj.text;
+      if (infoModalSubtitle) infoModalSubtitle.textContent = infoObj.subtitle || '';
+
+      // Build sidebar navigation buttons
+      if (infoModalNav) {
+        infoModalNav.innerHTML = '';
+        infoObj.sections.forEach((section, index) => {
+          const btn = document.createElement('button');
+          btn.className = 'info-nav-item' + (index === 0 ? ' active' : '');
+          btn.innerHTML = `<i class="${section.icon || 'fas fa-circle'}"></i><span>${section.label}</span>`;
+          btn.addEventListener('click', () => {
+            // Flag to gracefully suspend intersecting observer / scroll listener
+            isScrollingFromClick = true;
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => { isScrollingFromClick = false; }, 800); // Resume after scroll animation
+
+            // Update active state across all sidebar items
+            infoModalNav.querySelectorAll('.info-nav-item').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Highlight matching content card and scroll to it deeply
+            if (infoModalContent) {
+              infoModalContent.querySelectorAll('.info-section-card').forEach(c => c.classList.remove('active-card'));
+              const targetCard = infoModalContent.querySelector(`[data-section-index="${index}"]`);
+              if (targetCard) {
+                targetCard.classList.add('active-card');
+                targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }
+          });
+          infoModalNav.appendChild(btn);
+        });
+      }
+
+      // Build content section cards
+      if (infoModalContent) {
+        infoModalContent.innerHTML = '';
+        infoObj.sections.forEach((section, index) => {
+          const card = document.createElement('div');
+          card.className = 'info-section-card' + (index === 0 ? ' active-card' : '');
+          card.setAttribute('data-section-index', index);
+          card.innerHTML = `
+            <div class="info-section-card-header">
+              <i class="${section.icon || 'fas fa-circle'}"></i>
+              <strong>${section.label}</strong>
+            </div>
+            <div class="info-section-card-body">${section.content}</div>
+          `;
+          infoModalContent.appendChild(card);
+        });
+        // Reset scroll position on new modal open
+        infoModalContent.scrollTop = 0;
+      }
+
       infoModal.classList.add('open');
-      document.body.style.overflow = 'hidden'; // Stop background scrolling
+      document.body.style.overflow = 'hidden';
     };
 
     if (infoCloseBtn && infoModal) {
@@ -732,7 +837,7 @@ document.addEventListener('DOMContentLoaded', () => {
         infoModal.classList.remove('open');
         document.body.style.overflow = '';
       });
-      
+
       // Close on clicking outside the modal panel overlay
       infoModal.addEventListener('click', (e) => {
         if (e.target === infoModal) {
