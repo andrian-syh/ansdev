@@ -315,7 +315,8 @@
 .info-modal-panel {
   width: 90%;
   max-width: 920px;
-  height: 85vh;               /* Explicit fixed height anchors internal scroll areas */
+  height: 85vh;
+  /* Explicit fixed height anchors internal scroll areas */
   max-height: 800px;
   display: flex;
   flex-direction: column;
@@ -334,8 +335,10 @@
 .info-modal-layout {
   display: grid;
   grid-template-columns: 260px 1fr;
-  flex: 1;                    /* Takes the full height of the flex-panel */
-  min-height: 0;              /* Prevents children from breaking flex constraint */
+  flex: 1;
+  /* Takes the full height of the flex-panel */
+  min-height: 0;
+  /* Prevents children from breaking flex constraint */
 }
 
 /* --- Left Sidebar --- */
@@ -345,7 +348,8 @@
   padding: 2rem 0;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;           /* Scrollable horizontally */
+  overflow-y: auto;
+  /* Scrollable horizontally */
   min-height: 0;
 }
 
@@ -416,20 +420,184 @@
   box-shadow: 0 0 8px var(--primary);
 }
 
+/* --- Sidebar Search Bar (FAQ only) --- */
+.info-modal-search {
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.info-modal-search input {
+  width: 100%;
+  padding: 0.65rem 0.75rem 0.65rem 2.2rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.82rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.info-modal-search input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(59, 130, 246, 0.06);
+}
+
+.info-modal-search input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.info-modal-search i {
+  position: absolute;
+  left: 1.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.8rem;
+  pointer-events: none;
+}
+
+/* --- Nav Item Text: Default (ToS, Payments) --- */
+.info-nav-item span {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 180px;
+  position: relative;
+}
+
+/* --- Nav Item Text: FAQ Mode --- */
+.faq-mode .info-nav-item span {
+  mask-image: linear-gradient(to right, #000 78%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, #000 78%, transparent 100%);
+  max-width: 160px;
+}
+
+/* No gradient if text fits without overflow */
+.faq-mode .info-nav-item span.no-overflow {
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+
+/* When active in FAQ, remove the mask and enable scrolling marquee */
+.faq-mode .info-nav-item.active span {
+  mask-image: none;
+  -webkit-mask-image: none;
+  animation: marquee-scroll 4s linear infinite;
+  animation-delay: 0.5s;
+}
+
+/* No marquee if text doesn't overflow */
+.faq-mode .info-nav-item.active span.no-overflow {
+  animation: none;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  10% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(calc(-100% + 160px));
+  }
+
+  60% {
+    transform: translateX(calc(-100% + 160px));
+  }
+
+  90% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Hidden state for search-filtered items */
+.info-nav-item.search-hidden {
+  display: none;
+}
+
+/* --- FAQ Article View (no card wrapper) --- */
+.faq-article-view {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.92rem;
+  line-height: 1.8;
+  animation: faqFadeIn 0.25s ease;
+}
+
+.faq-article-view h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-main);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.faq-article-view h3 i {
+  color: var(--primary);
+  font-size: 0.95rem;
+}
+
+.faq-article-view ul,
+.faq-article-view ol {
+  padding-left: 0;
+  margin-left: 1.2rem;
+}
+
+.faq-article-view li {
+  margin-bottom: 0.75rem;
+}
+
+.faq-article-view strong {
+  color: #fff;
+}
+
+.faq-article-view em {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes faqFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* --- Right Content Panel --- */
 .info-modal-main {
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  min-height: 0;              /* Crucial for flex scrolling inside grid */
+  min-height: 0;
+  /* Crucial for flex scrolling inside grid */
 }
 
 .info-modal-header {
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  flex-shrink: 0;             /* Prevent header from squishing */
+  flex-shrink: 0;
+  /* Prevent header from squishing */
 }
 
 .info-modal-header h2 {
@@ -548,9 +716,134 @@
     border-radius: 16px;
   }
 
-  /* Hide the sidebar navigation completely on mobile */
+  /* Hide the sidebar navigation completely on mobile (ToS, Payments) */
   .info-modal-sidebar {
     display: none;
+  }
+
+  /* Show sidebar for FAQ modal only — converted to horizontal topic bar */
+  .info-modal-panel.faq-mode .info-modal-sidebar {
+    display: flex;
+    flex-direction: column;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 0.75rem 0 0;
+    max-height: 140px;
+    overflow: hidden;
+  }
+
+  .info-modal-panel.faq-mode .info-modal-search {
+    padding: 0 3.5rem 0.5rem 0.75rem;
+    /* Pushes input away from close button */
+    margin-bottom: 0.5rem;
+  }
+
+  .info-modal-panel.faq-mode .info-modal-search i {
+    left: 1.45rem;
+    top: calc(50% - 0.25rem);
+    /* Adjust centering to account for container padding */
+  }
+
+  /* FAQ Mobile Dropdown Selector Toggle */
+  .faq-mobile-selector {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1rem;
+    margin: 0 0.75rem 0.75rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    color: #fff;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .faq-mobile-selector i.chevron {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+    opacity: 0.6;
+  }
+
+  .faq-mobile-selector.open {
+    border-color: var(--primary);
+    background: rgba(59, 130, 246, 0.1);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-color: transparent;
+    /* Seamless connection */
+  }
+
+  .faq-mobile-selector.open i.chevron {
+    transform: rotate(180deg);
+    opacity: 1;
+    color: var(--primary-glow);
+  }
+
+  .info-modal-panel.faq-mode .info-modal-sidebar-nav {
+    display: none;
+    /* Hidden by default in mobile dropdown mode */
+    flex-direction: column;
+    position: absolute;
+    top: 104px;
+    /* Exact flush connection below toggle */
+    left: 0.75rem;
+    right: 0.75rem;
+    background: rgba(10, 15, 30, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--primary);
+    border-top: none;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    max-height: 250px;
+    overflow-y: auto;
+    padding: 0.25rem;
+    animation: dropdownSlideDown 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .info-modal-panel.faq-mode .info-modal-sidebar-nav.open {
+    display: flex;
+  }
+
+  @keyframes dropdownSlideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .info-modal-panel.faq-mode .info-nav-item {
+    padding: 0.85rem 1rem;
+    font-size: 0.85rem;
+    border-left: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: transparent;
+    width: 100%;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .info-modal-panel.faq-mode .info-nav-item:last-child {
+    border-bottom: none;
+  }
+
+  .info-modal-panel.faq-mode .info-nav-item.active {
+    display: none;
+    /* Hide active topic from dropdown list */
+  }
+
+  .info-modal-panel.faq-mode .info-modal-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
   }
 
   /* Switch to single-column stacked layout */
@@ -592,7 +885,7 @@
   }
 
   /* Ensure close button is always easily reachable */
-  .info-modal-panel > .modal-close-btn {
+  .info-modal-panel>.modal-close-btn {
     top: 0.75rem;
     right: 0.75rem;
     z-index: 10;
@@ -693,7 +986,7 @@
   user-select: none;
 }
 
-.tos-checkbox:disabled + label {
+.tos-checkbox:disabled+label {
   cursor: default;
 }
 

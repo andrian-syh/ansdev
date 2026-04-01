@@ -216,51 +216,93 @@ const CONFIG = {
       ]
     }
   ],
+
   // Service Information Entries — Each entry contains navigable sub-sections
   serviceInfo: [
     {
       id: "tos",
       text: "Terms of Service",
       title: "Terms of Service",
-      subtitle: "Last updated: April 2026",
+      subtitle: "Last updated: April 01, 2026",
       icon: "fas fa-file-contract",
       sections: [
         {
-          label: "Payment Upfront",
-          icon: "fas fa-money-bill-wave",
-          content: "A 50% non-refundable down payment is strictly required to secure your slot and commence development. The remaining 50% balance must be cleared upon project completion, prior to the handover of the final place/file."
-        },
-        {
-          label: "Scope of Work",
-          icon: "fas fa-clipboard-list",
+          label: "Project Scope",
+          icon: "fas fa-crosshairs",
           content: `
             <ul style="list-style: disc; margin-left: 1.5rem;">
-              <li style="margin-bottom: 0.8rem;"><strong>General Scope:</strong> Development is strictly based on the initially agreed-upon brief or Game Design Document (GDD). Any new mechanics, UI changes, or feature requests made after development has started will be quoted and billed as a separate task.</li>
-              <li style="margin-bottom: 0.8rem;"><strong>Rushed Deadlines:</strong> The initial deadline is mutually agreed upon before the down payment. Any subsequent requests to significantly expedite the delivery date will be evaluated based on my current availability. Such requests will incur an additional "Rush Fee" (25%-50% of the total quote) or may be respectfully declined to maintain the quality of the work.</li>
-              <li style="margin-bottom: 0.8rem;"><strong>Confidentiality & Portfolio Rights:</strong> Your game ideas, mechanics, and unreleased content are kept strictly confidential during development. However, I reserve the right to display visual snippets, screenshots, or video demonstrations of the completed systems in my personal portfolio <i>only after</i> the project has been officially released to the public or explicitly approved by you.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Strict Adherence to Baseline:</strong> Development is executed strictly based on the mutually agreed-upon brief, Game Design Document (GDD), or final feature list documented in our text chat before the upfront payment is made. Casual discussions or verbal ideas not explicitly listed in the final agreement are not considered part of the scope.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Specialization & Limitations:</strong> My primary expertise lies in full-stack Luau programming, server-client architecture, data management, and core game logic. I do <strong>not</strong> specialize in advanced Roblox physics (e.g., complex vehicle suspensions, custom character controllers), frame-perfect melee combat frameworks, or highly aesthetic visual scripting. Projects relying heavily on these mechanics must be discussed transparently beforehand, and I reserve the right to decline them or request that you hire a specialized developer for those specific modules.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Handling Scope Creep:</strong> Any requests for new mechanics, UI alterations, or functionality expansions made <em>after</em> development has commenced are classified as "Scope Creep." These requests will not be accommodated under the original invoice. They will be evaluated, quoted, and billed as entirely separate tasks, and may require the current development phase to be paused until the new invoice is settled.</li>
             </ul>
           `
         },
         {
-          label: "Revisions & Bugs",
+          label: "Payments",
+          icon: "fas fa-money-check-alt",
+          content: `
+            <ul style="list-style: disc; margin-left: 1.5rem;">
+              <li style="margin-bottom: 0.8rem;"><strong>Payment Structure & Non-Refundability:</strong> A 50% down payment is strictly required to secure your slot on my schedule and initiate development. This deposit is entirely <strong>non-refundable</strong> as it compensates for the immediate reservation of my time, preliminary research, and initial labor. The remaining 50% balance must be fully cleared before any final files, uncopylocked places, or source scripts are handed over.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Large-Scale Milestone Payments:</strong> For Full Projects or frameworks exceeding a specific tier, a milestone-based structure (e.g., 30% upfront, 30% mid-development, 40% prior to final delivery) will be enforced to minimize risk for both parties.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Chargeback Fraud & Payment Disputes:</strong> Any attempt to forcefully reverse a payment, open an unauthorized dispute, or initiate a chargeback (e.g., via PayPal or Bank) after the delivery of functional digital goods is considered a severe breach of contract. Such actions will result in an immediate Roblox DMCA takedown against your game, public blacklisting, and a formal scam report submitted to developer communities (e.g., DevForum, HiddenDevs).</li>
+            </ul>
+          `
+        },
+        {
+          label: "Timelines",
+          icon: "fas fa-clock",
+          content: `
+            <ul style="list-style: disc; margin-left: 1.5rem;">
+              <li style="margin-bottom: 0.8rem;"><strong>Dynamic Deadlines:</strong> Provided delivery dates are highly educated estimates. While I strive to meet them consistently, unforeseen technical roadblocks or engine limitations may occasionally require extensions. You will be promptly notified if such situations arise.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Client-Caused Delays:</strong> The agreed-upon timeline operates under the assumption that you will provide all necessary assets and feedback promptly. If development is halted because I am waiting for your assets or approval, the final deadline will be automatically extended by the exact number of days delayed, plus any additional time required to re-accommodate your project into my shifted schedule.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Expedited & Rushed Delivery:</strong> Sudden requests to significantly shorten the agreed-upon deadline disrupt workflow. Such requests will incur a mandatory "Rush Fee" ranging from 25% to 50% of the total quote, depending on severity, or may be strictly declined if my schedule does not permit it.</li>
+            </ul>
+          `
+        },
+        {
+          label: "Client Duties",
+          icon: "fas fa-user-check",
+          content: `
+            <ul style="list-style: disc; margin-left: 1.5rem;">
+              <li style="margin-bottom: 0.8rem;"><strong>Asset Provision & Quality:</strong> Unless a specific Full Project agreement states otherwise, you are solely responsible for supplying all necessary 3D models, animations, audio, and UI graphics. These assets must be organized, properly formatted, and ready for integration (e.g., properly rigged models, logically named UI elements). I reserve the right to reject messy or unusable assets that severely hinder the scripting process.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Visuals, VFX & Animations (Creative Limits):</strong> I am a logic programmer, not a Technical Artist or Animator. If your system requires visual effects (e.g., particles, beams, camera shakes, lighting changes) or animations, you must provide the pre-made assets. I will script the underlying logic to <em>trigger</em> them perfectly, but I will not create, design, or endlessly tweak the aesthetic "feel" of these assets. If no visual assets are provided, I will use standard Roblox placeholders (e.g., basic parts or output prints) to demonstrate that the underlying logic is fully functional.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Asset Legality & Liability Exemption:</strong> You explicitly guarantee that all assets provided for me to integrate are originally created by you, legally purchased, or appropriately licensed, and fully comply with Roblox's Terms of Use. I hold absolutely zero liability for any moderation actions, account terminations, or copyright strikes taken against your game due to stolen, leaked, or inappropriate assets provided by you or your team.</li>
+            </ul>
+          `
+        },
+        {
+          label: "Bugs & Warranty",
           icon: "fas fa-bug",
           content: `
             <ul style="list-style: disc; margin-left: 1.5rem;">
-              <li style="margin-bottom: 0.8rem;"><strong>Post-Delivery Warranty:</strong> I provide a 7-day warranty post-delivery for minor bug patches and logical tweaks related to the original scope. Major feature modifications or out-of-scope revisions will incur additional flat or hourly charges.</li>
-              <li style="margin-bottom: 0.8rem;"><strong>Bug vs. Feature:</strong> A "bug" is strictly defined as code that produces errors or fails to function as explicitly outlined in the initial brief. Changes to the logic, visual design, or overall "feel" of a mechanic after it has been approved are classified as revisions—not bug fixes—and may be billed separately.</li>
-              <li style="margin-bottom: 0.8rem;"><strong>Long-Term Maintenance & Roblox Updates:</strong> After the 7-day warranty expires, the project is considered finalized. Any future breakages caused by official Roblox engine updates, API deprecations, or modifications made by other scripters are not covered under free support. Fixing these issues will require a new commission or a separate maintenance contract.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Defining Bugs vs. Revisions:</strong> A "bug" is strictly defined as code that produces explicit console errors or objectively fails to execute the mechanics detailed in the initial brief. Subjective changes to the visual design, timing, or overall "feel" of a system after it has been approved are classified as "Revisions" and will incur separate hourly or flat-rate charges.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Tiered Warranty Coverage:</strong> Upon final delivery, I provide a 7-day warranty for Core Systems and a 14-day warranty for Full Projects exclusively for patching minor bugs related to the original scope. <em>(Quick Fixes are considered complete and final immediately upon your approval during the playtesting phase).</em> Valid bug reports must include clear reproduction steps or video evidence.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Technical Limitations & Unresolvable Bugs:</strong> While I strive for flawless execution, certain bugs may be fundamentally unresolvable due to underlying Roblox engine limitations (e.g., physics glitches, network latency) or extreme technical constraints. If I exhaust a reasonable amount of effort and determine a bug cannot be fixed cleanly, I reserve the right to implement a functional workaround.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Feature Scrapping:</strong> If an unresolvable bug prevents a specific feature from working entirely and no workaround is viable, that specific feature will be scrapped. A fair, partial discount strictly relative to the value of that specific feature will be deducted from your final invoice, rather than refunding or canceling the entire project.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Strict Warranty Voidance:</strong> The free warranty is immediately and permanently voided if you, another developer, or any third-party script modify, tamper with, delete, or overwrite any part of my delivered source code. Bug reports will only be entertained if they are reproducible on the original, unmodified version of the file I delivered.</li>
             </ul>
           `
         },
         {
-          label: "Code Ownership",
-          icon: "fas fa-key",
+          label: "Maintenance",
+          icon: "fas fa-tools",
           content: `
             <ul style="list-style: disc; margin-left: 1.5rem;">
-              <li style="margin-bottom: 0.8rem;"><strong>Rights Transfer:</strong> All commercial rights, source code, and assets remain my property during development. Complete ownership is officially transferred to the client only after the final 50% payment is fully cleared.</li>
-              <li style="margin-bottom: 0.8rem;"><strong>Testing Security:</strong> All playtesting will be conducted in a heavily secured, server-sided environment owned by me. No edit access, Team Create invitations, or uncopylocked files will be provided until the final payment is cleared. Any attempt to exploit or steal assets during the testing phase will result in immediate project termination without a refund.</li>
-              <li style="margin-bottom: 0.8rem;"><strong>Anti-Reselling & Distribution:</strong> The final scripts, systems, and UI configurations are strictly licensed for use in your specific game or studio only. Reselling, leaking, open-sourcing, or distributing my code to third parties without explicit written permission is strictly prohibited and will result in a DMCA takedown.</li>
-              <li style="margin-bottom: 0.8rem;"><strong>Attribution & White-Label Service:</strong> In-game crediting (such as in the game's description or UI) is entirely optional and left to your discretion. By default, I retain the right to showcase visual snippets or video demonstrations of the completed systems in my personal portfolio after the game is publicly released. If you require a strict Non-Disclosure Agreement (NDA) or a "White-Label" service—meaning I am completely prohibited from claiming, discussing, or showcasing the work publicly anywhere—an additional privacy fee (e.g., 20% of the total quote) will be applied to the final invoice.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>RevShare Update Limits:</strong> A Hybrid RevShare agreement covers the payment for the <em>initial</em> agreed-upon scope of work. Earning a percentage of the game's revenue does <strong>not</strong> entitle the client to demand infinite free content updates, DLCs, bug fixes after the warranty, or new systems post-launch. Future updates require a separate negotiation, an hourly pay rate, or a renegotiated share percentage.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Exclusion of Future Roblox Updates:</strong> Once the designated warranty period expires, the delivered system is considered a finalized product. Any future breakages caused by official Roblox engine updates, Luau syntax changes, API deprecations, or updates to third-party modules (e.g., ProfileStore) are entirely outside of my responsibility.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Long-Term Support:</strong> Resolving outdated code or fixing systems broken by future Roblox updates will require a brand new commission quote, an hourly repair rate, or the establishment of a separate, ongoing maintenance contract.</li>
+            </ul>
+          `
+        },
+        {
+          label: "Ownership",
+          icon: "fas fa-shield-alt",
+          content: `
+            <ul style="list-style: disc; margin-left: 1.5rem;">
+              <li style="margin-bottom: 0.8rem;"><strong>Secure Testing & Rights Transfer:</strong> All testing during development will be strictly conducted in a heavily secured, server-sided place owned by me. No edit access, Team Create invitations, or uncopylocked files will be provided under any circumstances until the final invoice is paid in full. Complete commercial ownership of the code is transferred only upon payment clearance.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Single-Use Licensing & Anti-Theft:</strong> The source code and systems provided are licensed exclusively for use in your specific game or studio. Reselling, leaking, open-sourcing, distributing my code to asset marketplaces, or sharing it with third parties without explicit written permission is strictly prohibited and will be met with immediate legal/DMCA action.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>RevShare Breach & License Revocation:</strong> For Hybrid RevShare projects, your right to use my source code is explicitly contingent on the continuous fulfillment of the agreed payout percentage. Arbitrarily removing me from the group payout, hiding revenue, or failing to distribute funds without a mutually agreed-upon buyout will result in the immediate revocation of the software license and a formal DMCA takedown notice against the game.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Portfolio Display & White-Label Service:</strong> I retain the baseline right to showcase visual snippets, screenshots, or video demonstrations of the completed systems in my personal portfolio after your game is officially public. If your project requires absolute secrecy (Non-Disclosure Agreement) or a "White-Label" service where I am prohibited from claiming the work publicly, a mandatory Privacy Fee (typically 20% of the total quote) will be added to the invoice.</li>
             </ul>
           `
         },
@@ -269,29 +311,30 @@ const CONFIG = {
           icon: "fas fa-ban",
           content: `
             <ul style="list-style: disc; margin-left: 1.5rem;">
-              <li style="margin-bottom: 0.8rem;"><strong>Client Cancellations:</strong> If the project is cancelled by the client after development has begun, the 50% down payment is strictly non-refundable as it covers initial time, research, and labor.</li>
-              <li><strong>Developer Cancellations:</strong>
-                <ul style="list-style: circle; margin-left: 1.5rem; margin-top: 0.5rem;">
-                  <li style="margin-bottom: 0.5rem;"><strong>Due to Unforeseen Circumstances:</strong> If I must cancel the project due to unavoidable schedule conflicts, emergencies, or an inability to meet the standard of quality required, you will receive a 100% full refund of your down payment.</li>
-                  <li><strong>Due to Client Breach:</strong> If the project is terminated on my end due to client hostility, extreme scope creep without renegotiation, or violation of these terms, development will cease and the 50% down payment remains non-refundable.</li>
-                  <li><strong>Project Dormancy:</strong> If the client fails to respond or provide necessary assets for more than 14 consecutive days without prior notice, the project will be considered abandoned. The down payment will be forfeited, and resuming the work will require a new schedule slot.</li>
-                </ul>
-              </li>
+              <li style="margin-bottom: 0.8rem;"><strong>Client-Initiated Cancellation:</strong> If you decide to cancel the project at any point after development has begun, the initial down payment is entirely forfeit and non-refundable.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Developer-Initiated Cancellation:</strong> If I am forced to cancel the project due to unforeseen real-life emergencies or unavoidable schedule conflicts, you will receive a pro-rated refund reflecting the amount of unfinished work, alongside the current progress of the source code. However, if I terminate the project due to a breach of ToS, extreme scope creep without renegotiation, or a hostile work environment (e.g., harassment, insults), development will cease immediately, and no refund will be provided.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Project Dormancy & Ghosting:</strong> Consistent communication is vital. If I require your feedback, approval, or assets to proceed, and you fail to respond for 14 consecutive days, the project will be temporarily frozen. A final 48-hour warning will be sent. If unheeded, the project is officially declared abandoned, all deposits are forfeited, and resuming the work at a later date will require a "Reactivation Fee" or a complete requote, subject to my availability.</li>
+            </ul>
+          `
+        },
+        {
+          label: "Ethics",
+          icon: "fas fa-gavel",
+          content: `
+            <ul style="list-style: disc; margin-left: 1.5rem;">
+              <li style="margin-bottom: 0.8rem;"><strong>Platform Compliance:</strong> I strictly do not accept projects that violate Roblox’s Terms of Use or Community Standards. This includes, but is not limited to, unauthorized gambling systems, "condo" or adult-themed content, and extremist or hate-speech related materials.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Legal & Moral Boundaries:</strong> I reserve the right to decline any project that involves scams, phishing, illegal activities, or content that promotes harassment and social harm.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Right of Refusal & Termination:</strong> If a project is found to have a hidden malicious intent after development has begun (e.g., a "backdoor" for stealing assets or deceptive monetization), I will terminate the project immediately. In such cases, the upfront payment is <strong>non-refundable</strong> due to the breach of ethical terms.</li>
             </ul>
           `
         },
         {
           label: "Communication",
           icon: "fas fa-comments",
-          content: "Regular progress updates will be provided. Please allow up to 24-48 hours for responses to inquiries, as development schedules are balanced alongside other daily commitments. Constant spamming or rushing will not be tolerated."
-        },
-        {
-          label: "Client Responsibilities",
-          icon: "fas fa-user-check",
           content: `
             <ul style="list-style: disc; margin-left: 1.5rem;">
-              <li style="margin-bottom: 0.8rem;"><strong>Asset Provision:</strong> Unless explicitly agreed otherwise, the client is solely responsible for providing all necessary 3D models, meshes, sound effects, and specific external graphic assets required for the script integration.</li>
-              <li style="margin-bottom: 0.8rem;"><strong>Asset Liability:</strong> The client guarantees that all 3D models, audio, UI graphics, or concepts provided for integration are original, legally acquired, and fully comply with Roblox's Terms of Use. I am not liable for any moderation actions or account strikes taken against games utilizing client-provided assets.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Working Hours & Timezones:</strong> Please note that my primary working timezone is <strong>[WIB / GMT+7]</strong>. While I provide regular progress updates, please allow a grace period of 24-48 hours for responses to general inquiries, particularly during weekends or national holidays.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Professional Conduct:</strong> All communication must be kept professional and strictly within our designated text channel (e.g., Discord) for documentation purposes. Voice calls are not mandatory and must be scheduled in advance. Constant spamming, demanding instant replies, or aggressive behavior will not be tolerated and may result in project termination.</li>
             </ul>
           `
         }
@@ -305,62 +348,175 @@ const CONFIG = {
       icon: "fas fa-credit-card",
       sections: [
         {
-          label: "General Terms",
-          icon: "fas fa-file-invoice-dollar",
+          label: "Pricing",
+          icon: "fas fa-tags",
           content: `
             <ul style="list-style: disc; margin-left: 1.5rem;">
-              <li style="margin-bottom: 0.8rem;"><strong>Payment Structure:</strong> A 50% non-refundable down payment is required to secure your slot and commence work, with the remaining 50% due upon project completion prior to the final handover.</li>
-              <li><strong>Currency:</strong> Quotes are primarily provided in USD or IDR.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Flat-Rate (Per Project):</strong> The standard model. A non-refundable 50% down payment is required to begin. The remaining 50% is due upon completion. Large projects may use a 30/30/40 milestone structure.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Hourly Rate:</strong> Ideal for complex R&D or consulting. Invoiced weekly. <strong>Important:</strong> The current invoice must be cleared before work for the subsequent week begins. Unpaid invoices will result in an immediate pause.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Monthly Retainer:</strong> Guarantees a set number of hours/deliverables per month. The fee must be paid <strong>upfront</strong> at the start of each cycle. Exceeding the agreed scope is billed as overtime.</li>
             </ul>
           `
         },
         {
-          label: "Accepted Methods",
-          icon: "fas fa-wallet",
+          label: "RevShare",
+          icon: "fas fa-chart-pie",
           content: `
             <ul style="list-style: disc; margin-left: 1.5rem;">
-              <li style="margin-bottom: 0.8rem;"><strong>Robux (Group Funds):</strong> Preferred method for Robux. No tax deductions apply. <em>(Note: Roblox requires users to be in a group for 14 days before receiving payouts)</em>.</li>
-              <li style="margin-bottom: 0.8rem;"><strong>Robux (T-Shirt/Gamepass):</strong> Accepted, but the client must cover the 30% Roblox marketplace fee. The final payment amount must be adjusted to ensure the net payout matches the agreed-upon quote.</li>
-              <li style="margin-bottom: 0.8rem;"><strong>Wise (Preferred for International):</strong> Highly recommended for international clients. It offers transparent exchange rates and lower transfer fees. Payments are sent directly to my local bank account.</li>
-              <li style="margin-bottom: 0.8rem;"><strong>PayPal:</strong> Accepted for international clients. Please note that the client is strictly responsible for covering any additional PayPal transaction fees (e.g., Goods & Services fee) so that the received net amount is exact.</li>
-              <li><strong>Bank Transfer & E-Wallet (Indonesia Only):</strong> Local transfers via BCA, BRI, Jago, DANA, and GoPay are accepted for domestic clients using standard IDR pricing.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Hybrid Model Requirement:</strong> I strictly <strong>do not</strong> accept 100% Revenue Share (0% upfront) projects. A hybrid model (a reduced flat-rate upfront payment + a negotiated percentage of game revenue) is required. The upfront fee compensates for my initial labor and is non-refundable, regardless of the game's future commercial success or failure.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Gross vs. Net Revenue:</strong> The agreed-upon RevShare percentage must be calculated based on the game's <strong>Gross Robux Income</strong> (after Roblox's standard 30% marketplace tax), prior to the deduction of the client's arbitrary advertising budgets, sponsor payouts, or other staff salaries, unless a strict net-profit formula is transparently documented and mutually signed.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Payout Distribution:</strong> RevShare must be distributed via automated recurring Group Payouts on Roblox. I must be granted permission to view the group's revenue analytics for transparency.</li>
             </ul>
           `
-        }
+        },
+        {
+          label: "Currencies",
+          icon: "fas fa-file-invoice-dollar",
+          content: `
+            <ul style="list-style: disc; margin-left: 1.5rem;">
+              <li style="margin-bottom: 0.8rem;"><strong>Base Currencies:</strong> Standard quotes are strictly issued in USD (international) or IDR (domestic).</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Exchange Rates & Fees:</strong> Conversion rates are determined when the invoice is generated. You are strictly responsible for covering any cross-border transaction fees, PayPal taxes, or conversion markups so the net amount I receive perfectly matches the quoted price.</li>
+            </ul>
+          `
+        },
+        {
+          label: "Fiat Methods",
+          icon: "fas fa-globe",
+          content: `
+            <ul style="list-style: disc; margin-left: 1.5rem;">
+              <li style="margin-bottom: 0.8rem;"><strong>Wise (Highly Recommended):</strong> The preferred method for international clients. Deposits directly into my local bank account with low fees.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>PayPal:</strong> Accepted, provided you fully cover the Goods & Services (G&S) fee. You must confirm receipt of the functional digital goods in our text chat before final handover to prevent chargeback fraud.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Indonesian Locals (IDR Only):</strong> Direct bank transfers (BCA, BRI, Jago) and E-Wallets (DANA, GoPay) are accepted. Proof of transfer is required.</li>
+            </ul>
+          `
+        },
+        {
+          label: "Robux Methods",
+          icon: "fas fa-coins",
+          content: `
+            <ul style="list-style: disc; margin-left: 1.5rem;">
+              <li style="margin-bottom: 0.8rem;"><strong>Group Funds:</strong> Preferred for Robux. <em>Note: Roblox mandates a 14-day waiting period for new group members before payouts can be issued.</em></li>
+              <li style="margin-bottom: 0.8rem;"><strong>T-Shirt / Gamepass:</strong> Accepted, but you <strong>must</strong> cover the 30% Roblox marketplace tax to ensure the net payout matches the quote (e.g., paying 1,429 Robux for a 1,000 Robux quote).</li>
+              <li style="margin-bottom: 0.8rem;"><strong>The "Pending" Rule:</strong> T-Shirt/Gamepass payments are "Pending" for 3-7 days. <strong>Final files will NOT be granted until the Robux has officially cleared and is usable in my account.</strong> Use Fiat methods for immediate delivery.</li>
+            </ul>
+          `
+        },
+        {
+          label: "Security",
+          icon: "fas fa-shield-alt",
+          content: `
+            <ul style="list-style: disc; margin-left: 1.5rem;">
+              <li style="margin-bottom: 0.8rem;"><strong>File Retention:</strong> I retain absolute ownership of all written code. No source scripts or uncopylocked places will be granted while there is an outstanding upfront balance.</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Fraud Prevention:</strong> Any unauthorized payment reversal, dispute, or chargeback initiated after the delivery of functional work is considered theft. This will result in an immediate Roblox DMCA takedown and public scam reports on developer forums.</li>
+            </ul>
+          `
+        },
       ]
     },
     {
-      id: "process",
-      text: "Work Process & Guidelines",
-      title: "How I Work",
-      subtitle: "From Vision to Deployment",
-      icon: "fas fa-project-diagram",
+      id: "faq",
+      text: "FAQ",
+      title: "Frequently Asked Questions",
+      subtitle: "Common Questions Answered",
+      icon: "fas fa-question-circle",
       sections: [
         {
-          label: "Consultation & Planning",
-          icon: "fas fa-handshake",
-          content: "We will discuss your game's vision, specific mechanics, and finalize a clear deadline and quote. Providing a detailed brief, Game Design Document (GDD), and any ready-to-use assets (3D models/UI) upfront is highly recommended to ensure an accurate timeline and avoid misunderstandings."
+          label: "The Development Workflow",
+          icon: "fas fa-route",
+          content: `
+            <h3 style="margin-bottom: 1rem; font-size: 1.2rem; font-weight: bold; color: #ffffff;">How We Work Together (Start to Finish)</h3>
+            <p style="margin-bottom: 1.8rem; line-height: 1.6; color: #cbd5e1;">To ensure a smooth and professional collaboration, every project strictly follows this 5-step development pipeline:</p>
+            
+            <div style="margin-bottom: 1.5rem;">
+              <h4 style="font-size: 1.05rem; font-weight: bold; color: #60a5fa; margin-bottom: 0.4rem;">1. Discovery & Quoting</h4>
+              <p style="line-height: 1.5; margin: 0; color: #94a3b8;">We discuss your game's vision. You provide a detailed Game Design Document (GDD) and a final feature list. I will then provide a fixed quote and an estimated timeframe.</p>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <h4 style="font-size: 1.05rem; font-weight: bold; color: #60a5fa; margin-bottom: 0.4rem;">2. Deposit & Scheduling</h4>
+              <p style="line-height: 1.5; margin: 0; color: #94a3b8;">Once the 50% non-refundable down payment is cleared, your project is officially locked into my schedule. Development officially begins.</p>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <h4 style="font-size: 1.05rem; font-weight: bold; color: #60a5fa; margin-bottom: 0.4rem;">3. Active Development</h4>
+              <p style="line-height: 1.5; margin: 0; color: #94a3b8;">I will write the core logic in a secured private baseplate. You will receive progress updates (screenshots/videos) at least twice a week. Any required assets (UI/Models) must be provided now.</p>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <h4 style="font-size: 1.05rem; font-weight: bold; color: #60a5fa; margin-bottom: 0.4rem;">4. Playtesting & Polishing</h4>
+              <p style="line-height: 1.5; margin: 0; color: #94a3b8;">You will be invited to a live, secured Roblox server to test the mechanics firsthand. We will polish the systems and patch any explicit bugs that deviate from the original brief.</p>
+            </div>
+
+            <div style="margin-bottom: 0;">
+              <h4 style="font-size: 1.05rem; font-weight: bold; color: #60a5fa; margin-bottom: 0.4rem;">5. Final Handover</h4>
+              <p style="line-height: 1.5; margin: 0; color: #94a3b8;">After you are 100% satisfied with the testing phase and the remaining 50% balance is fully cleared, I will securely hand over the uncopylocked <code>.rbxl</code> file or the final scripts.</p>
+            </div>
+          `
         },
         {
-          label: "Down Payment & Scheduling",
-          icon: "fas fa-file-invoice-dollar",
-          content: "Once the 50% upfront payment is secured, I will officially lock your project into my schedule. This guarantees dedicated development time and prevents your slot from being taken by other client inquiries."
+          label: "Project Requirements",
+          icon: "fas fa-clipboard-check",
+          content: `
+            <h3 style="margin-bottom: 1rem; font-size: 1.2rem; color: #fff;">What do I need to provide before we start?</h3>
+            <p style="margin-bottom: 1rem; line-height: 1.6;">To prevent delays and scope misunderstandings, I highly recommend having the following ready before paying the initial deposit:</p>
+            <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.6;">
+              <li style="margin-bottom: 0.8rem;"><strong>A Clear Brief or GDD:</strong> A written document detailing exactly how the mechanics should work. The more specific, the better. (e.g., instead of "Make a combat system," use "Make a 3-hit combo combat system with blocking and stamina drain").</li>
+              <li style="margin-bottom: 0.8rem;"><strong>Required Assets (Visuals):</strong> I am a logic programmer, not a 3D Modeler, UI Designer, or VFX Artist. You must provide all necessary visual assets (UI screens, rigged models, animations, sound effects). If no assets are provided, I will use basic Roblox placeholder parts to build the logic.</li>
+            </ul>
+          `
         },
         {
-          label: "Development & Updates",
-          icon: "fas fa-code",
-          content: "Development begins on a secure, private baseplate. To keep you consistently in the loop while maintaining a highly focused coding workflow, I will provide comprehensive progress updates (videos/screenshots) at least twice a week via Discord or our mutually agreed communication platform."
+          label: "Pricing & RevShare",
+          icon: "fas fa-chart-pie",
+          content: `
+            <h3 style="margin-bottom: 1rem; font-size: 1.2rem; color: #fff;">How do you calculate prices, and do you accept RevShare?</h3>
+            <p style="margin-bottom: 0.8rem; line-height: 1.6;"><strong>Quote Calculation:</strong> Every project is uniquely quoted based on the complexity of the logic, the estimated hours required, and the level of server-client security needed to prevent exploiters.</p>
+            <p style="margin-bottom: 1rem; line-height: 1.6;"><strong>Revenue Share Policy:</strong> I <strong>do not</strong> accept projects that offer 100% Revenue Share (0% upfront money). Building games takes massive amounts of time and energy, and an upfront payment is required to reserve my schedule. However, I am open to <strong>Hybrid Models</strong> (a discounted upfront flat-rate + a smaller percentage of the game's gross revenue) for serious, long-term studio projects. Please read the "Payment Details" section for complete rules on RevShare.</p>
+          `
         },
         {
-          label: "Testing & Feedback",
-          icon: "fas fa-vial",
-          content: "You will be invited to a live testing place to experience the mechanics firsthand. During this phase, you can point out necessary adjustments or bug fixes to ensure the final product meets your expectations (adjustments must remain within the originally agreed-upon scope)."
+          label: "Adding Features Later",
+          icon: "fas fa-plus-circle",
+          content: `
+            <h3 style="margin-bottom: 1rem; font-size: 1.2rem; color: #fff;">Can I add new ideas midway through development?</h3>
+            <p style="margin-bottom: 1rem; line-height: 1.6;">Yes, but it will be treated as a separate task. This is commonly known as <strong>Scope Creep</strong>.</p>
+            <p style="margin-bottom: 1rem; line-height: 1.6;">The initial quote and deadline are strictly calculated based on the <em>original agreement</em>. If you suddenly want to add a Pet System while I am halfway through coding your Combat System, I will gladly do it! However, I will need to generate a <strong>new quote</strong> for the Pet System, and the final project deadline will be extended.</p>
+            <p style="line-height: 1.6;">This ensures that I can maintain the quality of the current code without being overwhelmed by endless free additions.</p>
+          `
         },
         {
-          label: "Final Payment & Handover",
-          icon: "fas fa-box-open",
-          content: "Once you are fully satisfied with the final product and the remaining 50% balance is cleared, I will officially transfer the uncopylocked .rbxl file or securely integrate the scripts and native UI directly into your Team Create place."
-        }
+          label: "Bugs & Future Updates",
+          icon: "fas fa-tools",
+          content: `
+            <h3 style="margin-bottom: 1rem; font-size: 1.2rem; color: #fff;">What happens if the code breaks or Roblox updates?</h3>
+            <p style="margin-bottom: 1rem; line-height: 1.6;"><strong>The Warranty Period:</strong> I provide a free 7-to-14 day warranty post-delivery (depending on project size) exclusively to patch any minor bugs related to the original code I wrote. A bug is defined as an explicit error, not a request to change how a feature "feels."</p>
+            <p style="margin-bottom: 1rem; line-height: 1.6;"><strong>Future Maintenance:</strong> Roblox constantly updates its engine, deprecates old APIs, and changes Luau syntax. If my code breaks 6 months from now because of an official Roblox update, that is outside of the warranty scope. You can hire me for a quick maintenance session (hourly rate) to repair the outdated code.</p>
+            <p style="line-height: 1.6;"><em>Note: The warranty is immediately voided if you or another scripter modify the core code I delivered before reporting the bug.</em></p>
+          `
+        },
+        {
+          label: "Restrictions",
+          icon: "fas fa-shield-virus",
+          content: `
+            <h3 style="margin-bottom: 1rem; font-size: 1.2rem; font-weight: bold; color: #ffffff;">What kind of projects do you NOT accept?</h3>
+            <p style="margin-bottom: 1.5rem; line-height: 1.6; color: #cbd5e1;">To maintain a professional and safe environment, I have a zero-tolerance policy for certain types of content. I will <strong>not</strong> work on:</p>
+            
+            <div style="margin-bottom: 1.2rem;">
+              <h4 style="font-size: 1.05rem; font-weight: bold; color: #f87171; margin-bottom: 0.4rem;">• Illegal & Policy Violations</h4>
+              <p style="line-height: 1.5; margin: 0; color: #94a3b8;">Anything that violates Roblox's ToS, such as unregulated gambling, "black market" systems, or malicious scripts designed to exploit other users.</p>
+            </div>
+
+            <div style="margin-bottom: 1.2rem;">
+              <h4 style="font-size: 1.05rem; font-weight: bold; color: #f87171; margin-bottom: 0.4rem;">• NSFW & Harmful Content</h4>
+              <p style="line-height: 1.5; margin: 0; color: #94a3b8;">Explicit/NSFW materials, extreme gore, or games that promote hate speech, harassment, and discrimination against any group.</p>
+            </div>
+
+            <div style="margin-bottom: 0;">
+              <h4 style="font-size: 1.05rem; font-weight: bold; color: #f87171; margin-bottom: 0.4rem;">• Scams & Deceptive Mechanics</h4>
+              <p style="line-height: 1.5; margin: 0; color: #94a3b8;">Systems built specifically to deceive players for Robux (Scam games) or phishing tools. My services are for legitimate game development only.</p>
+            </div>
+          `
+        },
       ]
     }
   ]

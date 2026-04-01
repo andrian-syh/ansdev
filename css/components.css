@@ -17,7 +17,7 @@
 }
 
 /* --- Navigation Bar --- */
-/* iOS-style Frosted Glass Effect Always On */
+/* Frosted Glass Effect */
 header {
   position: fixed;
   top: 0;
@@ -87,7 +87,7 @@ header.scrolled {
   }
 }
 
-/* --- Mobile Menu Toggle (Unique Asymmetrical Style) --- */
+/* --- Mobile Menu Toggle (Asymmetrical Style) --- */
 .mobile-toggle-btn {
   display: none;
   /* Hidden on desktop */
@@ -195,7 +195,6 @@ header.scrolled {
 .mobile-nav-item.active {
   color: #fff;
   transform: scale(1.05);
-  /* Modern scaling */
 }
 
 /* Show toggle on mobile screens */

@@ -391,7 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderProjects();
 
     // ==========================================
-    // 4. DOUBLE MARQUEE / CONVEYER BELT LOGIC (index.html)
+    // DOUBLE MARQUEE / CONVEYER BELT LOGIC (index.html)
     // ==========================================
     const marqueeTrack1 = document.getElementById('ui-portfolio-marquee-1');
     const marqueeTrack2 = document.getElementById('ui-portfolio-marquee-2');
@@ -442,7 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 5. TESTIMONIALS / REPUTATION LOGIC
+    // TESTIMONIALS / REPUTATION LOGIC
     // ==========================================
     const testiGrid = document.getElementById('ui-testimonial-grid');
     const testiActionsContainer = document.getElementById('ui-testimonial-actions');
@@ -561,7 +561,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 6. ACTIVE NAV SPY (Scroll Tracker)
+    // ACTIVE NAV SPY (Scroll Tracker)
     // ==========================================
     const sections = document.querySelectorAll('section[id]');
     // Exclusively target internal anchor links mapping to sections
@@ -592,7 +592,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 7. SERVICES (RATE CARDS) LOGIC
+    // SERVICES (RATE CARDS) LOGIC
     // ==========================================
     const pBoard = document.getElementById('ui-pricing-board');
     if (pBoard && CONFIG.services && CONFIG.services.length > 0) {
@@ -708,7 +708,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 8. SPLIT-PANEL INFO MODAL (ToS, Payments, Process)
+    // SPLIT-PANEL INFO MODAL (ToS, Payments, Process)
     // ==========================================
     const infoModal = document.getElementById('info-modal');
     const infoCloseBtn = document.getElementById('info-modal-close-btn');
@@ -723,6 +723,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let isTosCurrentlyOpen = false;
     let hasScrolledTosToBottom = false;
+
+    // Utility: detect if nav item text overflows its container
+    function detectNavOverflow() {
+      if (!infoModalNav) return;
+      infoModalNav.querySelectorAll('.info-nav-item span').forEach(span => {
+        // Compare actual text width vs visible container width
+        if (span.scrollWidth > span.clientWidth + 5) {
+          span.classList.remove('no-overflow');
+        } else {
+          span.classList.add('no-overflow');
+        }
+      });
+    }
 
     const tosModule = document.getElementById('tos-acceptance-module');
     const tosSigInput = document.getElementById('tos-signature-input');
@@ -781,14 +794,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const signature = tosSigInput.value.trim();
         const originalText = tosAcceptBtn.innerText;
-        
+
         // UX: Disable UI and show loading
         tosAcceptBtn.innerText = 'Fetching Data & Saving...';
         tosAcceptBtn.disabled = true;
 
         // Fetch user IP details securely
         const ipData = await fetchClientIPMetadata();
-        
+
         // Attempt Firestore save
         if (typeof window.saveSignatureToDatabase === 'function') {
           const result = await window.saveSignatureToDatabase(signature, ipData);
@@ -895,60 +908,169 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!infoModal || !infoObj || !infoObj.sections) return;
 
       isTosCurrentlyOpen = (infoObj.id === 'tos');
+      const isFaqMode = (infoObj.id === 'faq');
+      const modalPanel = infoModal.querySelector('.info-modal-panel');
+
+      // Toggle FAQ-specific class for mobile sidebar visibility
+      if (modalPanel) {
+        modalPanel.classList.toggle('faq-mode', isFaqMode);
+      }
+
+      // Show/hide search bar (FAQ only)
+      const searchContainer = document.getElementById('info-modal-search');
+      const searchInput = document.getElementById('info-search-input');
+      if (searchContainer) {
+        searchContainer.style.display = isFaqMode ? 'block' : 'none';
+      }
+      if (searchInput) searchInput.value = '';
 
       // Populate header
       if (infoModalTitle) infoModalTitle.textContent = infoObj.title || infoObj.text;
       if (infoModalSubtitle) infoModalSubtitle.textContent = infoObj.subtitle || '';
 
+      // Store sections reference for FAQ article rendering
+      const currentSections = infoObj.sections;
+
+      // Helper: render FAQ article view (single topic, no card wrapper)
+      function renderFaqArticle(sectionIndex) {
+        if (!infoModalContent || !currentSections[sectionIndex]) return;
+        const section = currentSections[sectionIndex];
+        infoModalContent.innerHTML = '';
+        infoModalContent.scrollTop = 0;
+        const article = document.createElement('div');
+        article.className = 'faq-article-view';
+        article.innerHTML = `
+          <h3><i class="${section.icon || 'fas fa-circle'}"></i> ${section.label}</h3>
+          <div>${section.content}</div>
+        `;
+        infoModalContent.appendChild(article);
+
+        // Mobile: Sync dropdown toggle label if it exists
+        const mobileToggle = document.querySelector('.faq-mobile-selector span');
+        if (mobileToggle) mobileToggle.textContent = section.label;
+      }
+
       // Build sidebar navigation buttons
       if (infoModalNav) {
         infoModalNav.innerHTML = '';
-        infoObj.sections.forEach((section, index) => {
+        currentSections.forEach((section, index) => {
           const btn = document.createElement('button');
           btn.className = 'info-nav-item' + (index === 0 ? ' active' : '');
+          btn.setAttribute('data-nav-index', index);
+          btn.setAttribute('data-label', section.label.toLowerCase());
           btn.innerHTML = `<i class="${section.icon || 'fas fa-circle'}"></i><span>${section.label}</span>`;
           btn.addEventListener('click', () => {
-            // Flag to gracefully suspend intersecting observer / scroll listener
-            isScrollingFromClick = true;
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => { isScrollingFromClick = false; }, 800); // Resume after scroll animation
-
             // Update active state across all sidebar items
             infoModalNav.querySelectorAll('.info-nav-item').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            // Highlight matching content card and scroll to it deeply
-            if (infoModalContent) {
-              infoModalContent.querySelectorAll('.info-section-card').forEach(c => c.classList.remove('active-card'));
-              const targetCard = infoModalContent.querySelector(`[data-section-index="${index}"]`);
-              if (targetCard) {
-                targetCard.classList.add('active-card');
-                targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Detect overflow for marquee (FAQ only)
+            if (isFaqMode) detectNavOverflow();
+
+            if (isFaqMode) {
+              // FAQ: render single article view
+              renderFaqArticle(index);
+            } else {
+              // Default: scroll to matching card
+              isScrollingFromClick = true;
+              clearTimeout(scrollTimeout);
+              scrollTimeout = setTimeout(() => { isScrollingFromClick = false; }, 800);
+
+              if (infoModalContent) {
+                infoModalContent.querySelectorAll('.info-section-card').forEach(c => c.classList.remove('active-card'));
+                const targetCard = infoModalContent.querySelector(`[data-section-index="${index}"]`);
+                if (targetCard) {
+                  targetCard.classList.add('active-card');
+                  targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
               }
             }
           });
           infoModalNav.appendChild(btn);
         });
+
+        // Check text overflow for marquee on initial render (FAQ only)
+        if (isFaqMode) requestAnimationFrame(detectNavOverflow);
       }
 
-      // Build content section cards
+      // --- FAQ Mobile Dropdown Logic ---
+      if (isFaqMode && window.innerWidth <= 700) {
+        let mobileToggle = infoModalNav.parentElement.querySelector('.faq-mobile-selector');
+        if (!mobileToggle) {
+          mobileToggle = document.createElement('div');
+          mobileToggle.className = 'faq-mobile-selector';
+          infoModalNav.parentElement.insertBefore(mobileToggle, infoModalNav);
+        }
+
+        // Set initial label from first section
+        mobileToggle.innerHTML = `<span>${currentSections[0].label}</span><i class="fas fa-chevron-down chevron"></i>`;
+
+        // Toggle open state logic
+        mobileToggle.onclick = (e) => {
+          e.stopPropagation();
+          const isOpen = mobileToggle.classList.toggle('open');
+          infoModalNav.classList.toggle('open', isOpen);
+        };
+
+        // Ensure clicking an item closes the dropdown
+        infoModalNav.querySelectorAll('.info-nav-item').forEach(btn => {
+          btn.addEventListener('click', () => {
+            mobileToggle.classList.remove('open');
+            infoModalNav.classList.remove('open');
+          });
+        });
+      } else {
+        const existingToggle = document.querySelector('.faq-mobile-selector');
+        if (existingToggle) existingToggle.remove();
+        infoModalNav.classList.remove('open');
+      }
+
+      // Search bar filtering logic (FAQ only)
+      if (isFaqMode) {
+        const searchInput = document.getElementById('info-search-input');
+        if (searchInput) {
+          const freshInput = searchInput.cloneNode(true);
+          searchInput.parentNode.replaceChild(freshInput, searchInput);
+
+          freshInput.addEventListener('input', () => {
+            const query = freshInput.value.toLowerCase().trim();
+            const navBtns = infoModalNav.querySelectorAll('.info-nav-item');
+
+            navBtns.forEach((btn) => {
+              const label = btn.getAttribute('data-label') || '';
+              const idx = parseInt(btn.getAttribute('data-nav-index'));
+              const sectionContent = currentSections[idx] ? currentSections[idx].content.toLowerCase() : '';
+              const matches = !query || label.includes(query) || sectionContent.includes(query);
+              btn.classList.toggle('search-hidden', !matches);
+            });
+          });
+        }
+      }
+
+      // Build content: FAQ = single article | Default = all cards
       if (infoModalContent) {
         infoModalContent.innerHTML = '';
-        infoObj.sections.forEach((section, index) => {
-          const card = document.createElement('div');
-          card.className = 'info-section-card' + (index === 0 ? ' active-card' : '');
-          card.setAttribute('data-section-index', index);
-          card.innerHTML = `
-            <div class="info-section-card-header">
-              <i class="${section.icon || 'fas fa-circle'}"></i>
-              <strong>${section.label}</strong>
-            </div>
-            <div class="info-section-card-body">${section.content}</div>
-          `;
-          infoModalContent.appendChild(card);
-        });
-        // Reset scroll position on new modal open
-        infoModalContent.scrollTop = 0;
+
+        if (isFaqMode) {
+          // Render the first section as article by default
+          renderFaqArticle(0);
+        } else {
+          // Default card-based rendering for ToS, Payments
+          currentSections.forEach((section, index) => {
+            const card = document.createElement('div');
+            card.className = 'info-section-card' + (index === 0 ? ' active-card' : '');
+            card.setAttribute('data-section-index', index);
+            card.innerHTML = `
+              <div class="info-section-card-header">
+                <i class="${section.icon || 'fas fa-circle'}"></i>
+                <strong>${section.label}</strong>
+              </div>
+              <div class="info-section-card-body">${section.content}</div>
+            `;
+            infoModalContent.appendChild(card);
+          });
+          infoModalContent.scrollTop = 0;
+        }
       }
 
       // -------------------------
@@ -956,7 +1078,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // -------------------------
       if (isTosCurrentlyOpen && tosModule) {
         tosModule.style.display = 'flex';
-        
+
         // Evaluate dynamic 14-days & Version validation
         let isAlreadyAccepted = false;
         try {
@@ -965,13 +1087,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const savedData = JSON.parse(rawData);
             const daysPassed = (Date.now() - savedData.timestamp) / (1000 * 60 * 60 * 24);
             const currentVersion = infoObj.subtitle || '';
-            
+
             // Re-prompt if 14 days passed or if ToS version text has updated
             if (daysPassed < 14 && savedData.version === currentVersion) {
               isAlreadyAccepted = true;
             }
           }
-        } catch(e) { console.warn('Could not parse ToS local storage', e); }
+        } catch (e) { console.warn('Could not parse ToS local storage', e); }
 
         if (isAlreadyAccepted) {
           if (tosSigInput && tosSigInput.parentElement) tosSigInput.parentElement.style.display = 'none';
@@ -1038,7 +1160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 9. CONTACT FORM LOGIC
+    // CONTACT FORM LOGIC
     // ==========================================
     const contactForm = document.getElementById('premium-contact-form');
     const statusMsg = document.getElementById('contact-status-msg');
@@ -1093,12 +1215,9 @@ document.addEventListener('DOMContentLoaded', () => {
           statusMsg.className = 'form-status error';
         }
 
-        // Kembalikan Tombol ke State Semula
         submitBtn.innerHTML = originalBtnText;
         submitBtn.disabled = false;
       });
     }
-
   }
-
 });
