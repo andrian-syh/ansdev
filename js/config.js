@@ -237,7 +237,7 @@ const CONFIG = {
       title: "Quick Fixes",
       icon: "fas fa-bolt",
       price: {
-        default: "Start at $10",
+        default: "Start at $15",
         ID: "Start at IDR 100K"
       },
       recommended: false,
@@ -256,8 +256,8 @@ const CONFIG = {
       title: "Core Systems",
       icon: "fas fa-code-branch",
       price: {
-        default: "Start at $80",
-        ID: "Start at IDR 800K"
+        default: "Start at $100",
+        ID: "Start at IDR 900K"
       },
       recommended: true,
       btnLabel: "Level Up Game",
@@ -275,7 +275,7 @@ const CONFIG = {
       title: "Full Projects",
       icon: "fas fa-hands-helping",
       price: {
-        default: "$400+ / Quote",
+        default: "$450+ / Quote",
         ID: "IDR 6.500K+ / Quote"
       },
       recommended: false,
