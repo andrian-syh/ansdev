@@ -220,9 +220,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Render Filters
     if (filtersContainer) {
-      pData.filters.forEach((filter, index) => {
+      // Dynamic Genre Extraction from Project Data
+      const uniqueGenres = ["All", ...new Set(pData.projects.map(p => p.genre))];
+      
+      uniqueGenres.forEach((filter) => {
         const btn = document.createElement('button');
-        btn.className = 'filter-btn' + (index === 0 ? ' active' : '');
+        btn.className = 'filter-btn' + (filter === "All" ? ' active' : '');
         btn.textContent = filter;
         btn.setAttribute('data-filter', filter);
 
@@ -271,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="project-card-content">
             <h3 class="project-title">
               ${proj.title}
-              <span class="project-visits">${proj.visits}</span>
+              <span class="project-visits"><i class="fas fa-user" style="margin-right: 4px;"></i>${proj.visits}</span>
             </h3>
             <p class="project-genre">${proj.tags.join(' &bull; ')}</p>
             <button class="btn btn-primary project-btn-mobile" style="margin-top:auto;" onclick="openProjectModal('${proj.id}')">View Details</button>
@@ -347,6 +350,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       document.getElementById('modal-img').src = proj.image;
       document.getElementById('modal-title').textContent = proj.title;
+      document.getElementById('modal-duration').innerHTML = `<i class="far fa-calendar-alt"></i> ${proj.duration}`;
+      document.getElementById('modal-desc').textContent = proj.description;
 
       const tagsContainer = document.getElementById('modal-tags');
       tagsContainer.innerHTML = '';
@@ -368,6 +373,25 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       document.getElementById('modal-link').href = proj.link;
+      
+      // Populate Stats (Visits, Likes, Favorites)
+      const statsContainer = document.getElementById('modal-stats');
+      if (statsContainer) {
+        statsContainer.innerHTML = `
+          <div class="modal-stat-item" data-tooltip="Total Visits">
+            <i class="fas fa-user"></i>
+            <span>${proj.visits}</span>
+          </div>
+          <div class="modal-stat-item" data-tooltip="Total Likes">
+            <i class="fas fa-thumbs-up"></i>
+            <span>${proj.likes || '0'}</span>
+          </div>
+          <div class="modal-stat-item" data-tooltip="Total Favorites">
+            <i class="fas fa-star"></i>
+            <span>${proj.favorites || '0'}</span>
+          </div>
+        `;
+      }
 
       modal.classList.add('open');
       document.body.style.overflow = 'hidden'; // Lock background scroll
@@ -413,7 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="project-card-content">
               <h3 class="project-title">
                 ${proj.title}
-                <span class="project-visits">${proj.visits}</span>
+                <span class="project-visits"><i class="fas fa-user" style="margin-right: 4px;"></i>${proj.visits}</span>
               </h3>
               <p class="project-genre" style="margin-bottom: 0;">${proj.genre}</p>
             </div>

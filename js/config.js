@@ -37,21 +37,23 @@ const CONFIG = {
       "I thrive on challenges and continuously seek to expand my knowledge in game design principles, performance optimization, and innovative Roblox features. My goal is to not just build games, but to create worlds that players love to explore and interact with."
     ],
     skills: ["Expert Luau Programmer", "Full-Stack Developer", "Clean & Modular Code", "Roblox Studio Specialist"],
-    cvLink: "assets/docs/MUHAMMAD ANDRIANSYAH (ATS CV).pdf"
+    cvLink: "assets/docs/MUHAMMAD ANDRIANSYAH (CV).pdf"
   },
 
   // Portfolio & Projects Repository
   portfolioData: {
-    filters: ["All", "Social", "Horror", "Story"],
     projects: [
       {
         id: "pulau-indo",
         title: "Pulau Indo",
         genre: "Social",
-        visits: "1.1M+",
-        image: "assets/images/projects/pulau-indo.png",
+        visits: "1.6M+",
+        likes: "2.7K+",
+        favorites: "5.5K+",
+        duration: "Jul 2025 — Present",
+        image: "assets/images/projects/pulau-indo.webp",
         tags: ["Voice Chat", "Hangout"],
-        link: "https://www.roblox.com/games/11627147587/Voice-Chat-Pulau-Indo-Hangout-ID",
+        link: "https://www.roblox.com/games/116271475876333",
         description: "Pulau Indo invites players into a vibrant voice-chat enabled hangout space designed to emulate the lively social dynamics of Indonesian culture.",
         contributions: [
           "Architected core framework optimizing real-time server-client interactions.",
@@ -64,8 +66,11 @@ const CONFIG = {
         id: "rohangan",
         title: "ROHANGAN",
         genre: "Horror",
-        visits: "7.5M+",
-        image: "assets/images/projects/rohangan.png",
+        visits: "7.7M+",
+        likes: "8.2K+",
+        favorites: "124K+",
+        duration: "Jul 2020 — Jul 2021",
+        image: "assets/images/projects/rohangan.webp",
         tags: ["First-Person", "Mystery"],
         link: "https://www.roblox.com/games/8662629736",
         description: "ROHANGAN challenges players in a first-person horror thriller, demanding exploration of an enigmatic facility armed only with a flashlight, where narrative elements are discovered dynamically.",
@@ -81,9 +86,12 @@ const CONFIG = {
         title: "The Monox",
         genre: "Horror",
         visits: "2M+",
-        image: "assets/images/projects/the-monox.png",
+        likes: "4.7K+",
+        favorites: "37.4K+",
+        duration: "Jan 2020 — Jul 2020",
+        image: "assets/images/projects/the-monox.webp",
         tags: ["First-Person", "Escape"],
-        link: "https://www.roblox.com/games/6030554423/THE-MONOX",
+        link: "https://www.roblox.com/games/6030554423",
         description: "The Monox is a chapter-based horror escape experience. Players traverse various distinct areas, uncovering narratives and confronting unique challenges in a gripping sequence of events.",
         contributions: [
           "Developed dynamic quest and objective systems.",
@@ -96,10 +104,13 @@ const CONFIG = {
         id: "living-doll",
         title: "Living Doll",
         genre: "Story",
-        visits: "450k+",
-        image: "assets/images/projects/living-doll.png",
+        visits: "503K+",
+        likes: "600+",
+        favorites: "2.2K+",
+        duration: "Jul 2021 — Jul 2022",
+        image: "assets/images/projects/living-doll.webp",
         tags: ["Mystery", "Chapter-based"],
-        link: "https://www.roblox.com/games/11916439633/STORY-Living-Doll-BETA",
+        link: "https://www.roblox.com/games/11916439633",
         description: "A chapter-based horror story game that immerses players into deeply developed scenes and storylines, exploring themes of mystery and impending dread.",
         contributions: [
           "Engineered dynamic gameplay mechanics.",
@@ -109,13 +120,37 @@ const CONFIG = {
         ]
       },
       {
+        id: "steal-an-animal",
+        title: "Steal An Animal",
+        genre: "Simulator",
+        visits: "2.3M+",
+        likes: "10K+",
+        favorites: "177K+",
+        duration: "May 2025 — Jul 2025",
+        image: "assets/images/projects/steal-an-animal.webp",
+        tags: ["Simulator", "Pet", "Multiplayer"],
+        link: "https://www.roblox.com/games/98847387964862",
+        description: "Steal An Animal is a high-stakes competitive simulator where players manage their own plots while engaging in bold pet-thievery. Participants can honestly acquire pets from a central distribution conveyor or infiltrate rival bases to seize valuable collections, all while deploying chaotic 'troll' tools like slap mechanics to stun and outmaneuver the competition.",
+        contributions: [
+          "Architected the full-stack game framework, encompassing all core loop mechanics.",
+          "Developed a robust plot-based saving and loading system for player bases.",
+          "Engineered the intricate pet stealing and conveyor-based acquisition logic.",
+          "Programmed a scalable pet rarity and randomized spawning system.",
+          "Integrated comprehensive progression systems including rebirths, shops, and dynamic events.",
+          "Scripted interactive troll tools and engagement mechanics, such as the synchronized slap system."
+        ]
+      },
+      {
         id: "unknown-story",
         title: "Unknown [STORY]",
         genre: "Story",
-        visits: "150k+",
-        image: "assets/images/projects/unknown-story.png",
+        visits: "150K+",
+        likes: "12K+",
+        favorites: "5.5K+",
+        duration: "Nov 2020 — Dec 2020",
+        image: "assets/images/projects/unknown-story.webp",
         tags: ["Story-Driven", "Adventure"],
-        link: "https://www.roblox.com/games/6116792985/Unknown-STORY",
+        link: "https://www.roblox.com/games/6116792985",
         description: "A story-driven adventure game where players embark on a journey filled with mysteries and unexpected plot twists, guided through carefully crafted events and scenes.",
         contributions: [
           "Engineered dynamic cinematic cutscenes.",
@@ -123,7 +158,46 @@ const CONFIG = {
           "Implemented interactive quest tracking.",
           "Managed comprehensive game state architecture."
         ]
-      }
+      },
+      {
+        id: "mesmerizer-troll-tower",
+        title: "✨Mesmerizer✨ Troll Tower",
+        genre: "Obby",
+        visits: "16.1K+",
+        likes: "60+",
+        favorites: "60+",
+        duration: "Jun 2025 — Jul 2025",
+        image: "assets/images/projects/mesmerizer-troll-tower.webp",
+        tags: ["Parkour", "Troll", "Anime"],
+        link: "https://www.roblox.com/games/137196281991681",
+        description: "Mesmerizer Troll Tower is a chaotic vertical obby experience where players race to the summit while navigating a field of unpredictable traps. The gameplay centers on a unique social dynamic where participants must either skillfully dodge obstacles to reach the finish line or embrace the role of a 'troll' to strategically hinder their rivals' progress.",
+        contributions: [
+          "Engineered the complete library of modular obby obstacles and hazards.",
+          "Programmed localized and server-synced kill-brick and damage-volume systems.",
+          "Developed dynamic moving platform mechanics and physics-based traps.",
+          "Scripted the win-condition logic and finish-line validation systems.",
+          "Optimized obstacle performance for high-player-count tower instances."
+        ]
+      },
+      {
+        id: "master-sambung-kata",
+        title: "Master Sambung Kata",
+        genre: "Puzzle",
+        visits: "18K+",
+        likes: "35+",
+        favorites: "50+",
+        duration: "Feb 2026 — Mar 2026",
+        image: "assets/images/projects/sambung-kata.webp",
+        tags: ["Word Puzzle", "Minigame"],
+        link: "https://www.roblox.com/games/100603276708946",
+        description: "Master Sambung Kata is an adrenaline-pumping word-chain puzzle game where players compete to connect words in real-time. Whether facing off against other players or an AI bot, the experience is intensified by strategic abilities that can shift the momentum of each match.",
+        contributions: [
+          "Architected the core word-connection system and real-time validation logic.",
+          "Integrated a strategic ability system featuring custom symbols and gameplay modifiers.",
+          "Engineered the global leaderboard and data persistence architecture.",
+          "Managed comprehensive game-state transitions and lobby management systems."
+        ]
+      },
     ]
   },
 

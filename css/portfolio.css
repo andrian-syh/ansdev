@@ -4,8 +4,17 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 3rem;
+  gap: 0.75rem;
+  margin: 0 auto 3rem auto;
+  max-width: 450px; /* Encourages wrap at ~3 items on mobile */
+}
+
+/* Limit to roughly 5 genres per line on desktop by controlling container width */
+@media (min-width: 900px) {
+  .portfolio-filters {
+    max-width: 950px; /* Encourages wrap at ~5 items on desktop */
+    gap: 1rem;
+  }
 }
 
 .filter-btn {
@@ -15,9 +24,13 @@
   border-radius: 999px;
   color: var(--text-muted);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  width: auto;
+  flex: 0 1 auto;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .filter-btn:hover {
@@ -79,7 +92,8 @@
   margin-bottom: 0.5rem;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 1rem;
 }
 
 .project-visits {
@@ -89,6 +103,110 @@
   padding: 0.3rem 0.6rem;
   border-radius: 4px;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.modal-duration-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.modal-duration-text i {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.modal-stats-group {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.modal-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.modal-stat-item i {
+  font-size: 1.1rem;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.modal-stat-item[data-tooltip="Total Visits"] i {
+  background-image: linear-gradient(135deg, #60a5fa, #3b82f6);
+}
+
+.modal-stat-item[data-tooltip="Total Likes"] i {
+  background-image: linear-gradient(135deg, #4ade80, #10b981);
+}
+
+.modal-stat-item[data-tooltip="Total Favorites"] i {
+  background-image: linear-gradient(135deg, #fbbf24, #f59e0b);
+}
+
+/* CUSTOM TOOLTIP SYSTEM */
+[data-tooltip] {
+  position: relative;
+  cursor: help;
+}
+
+[data-tooltip]::before,
+[data-tooltip]::after {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  bottom: calc(100% + 12px);
+  background: rgba(7, 9, 15, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-main);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Tooltip Arrow */
+[data-tooltip]::before {
+  content: '';
+  bottom: calc(100% + 2px);
+  border: 6px solid transparent;
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-tooltip]:hover::after,
+[data-tooltip]:hover::before {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
 .project-genre {
