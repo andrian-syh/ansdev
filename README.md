@@ -1,58 +1,69 @@
-# Personal Portfolio & Roblox Developer Showcase
+# AnS_Dev | Professional Roblox Developer Portfolio
 
-> A dynamic online presence showcasing my journey, skills, and contributions as a Roblox Developer.
+Dynamic portfolio website designed to showcase game development expertise, technical contributions, and professional services within the Roblox ecosystem.
 
-## 👋 About This Project
+> [!NOTE]
+> This repository is the source of truth for my professional presence. It is built with a focus on modularity, performance, and modern web aesthetics.
 
-This repository contains the source code for my personal portfolio website, developed by **Muhammad Andriansyah (AnS_Dev)**. It serves as a comprehensive digital platform to introduce myself, highlight my expertise in Roblox game development (particularly with **Luau scripting**), and showcase the projects I've passionately contributed to.
+## Project Overview
 
-The primary goal of this website is to:
-*   Introduce myself professionally to potential clients, collaborators, or employers.
-*   Detail my skills and experience as a Roblox Developer.
-*   Present a curated collection of my game development work and contributions.
-*   Offer clear channels for contact and potential engagement.
+This platform serves as a comprehensive digital showroom for **Muhammad Andriansyah (AnS_Dev)**. It highlights specialized expertise in **Luau scripting**, system architecture, and full-stack Roblox game development.
 
-## 🎯 Purpose and Intended Use
+The primary objectives of this project are:
+- To present a curated gallery of high-impact Roblox projects.
+- To provide a transparent overview of development services and pricing.
+- To facilitate secure service agreements through an integrated Terms of Service system.
+- To offer direct communication channels for potential clients and collaborators.
 
-This project is developed strictly for my **personal use** as a live portfolio and professional introduction. The codebase, all associated assets (images, styles, scripts), and content within this repository are proprietary.
+## Core Tech Stack
 
-**They are NOT intended for public use, distribution, modification, or replication by any other individuals or entities without my express prior written permission.**
+- **Frontend**: Semantic HTML5, Vanilla JavaScript (ES6+).
+- **Styling**: Modular CSS3 utilizing CSS Variables for theme consistency.
+- **Backend & Persistence**: Firebase Firestore for secure digital record-keeping.
+- **Tools & Libraries**: 
+  - Font Awesome for iconography.
+  - Google Fonts (Inter) for typography.
+  - jsPDF for dynamic contract generation.
+  - Google reCAPTCHA v2 for security.
 
-This repository exists primarily for:
-*   Version control of my portfolio website.
-*   Personal backup.
-*   Managing the deployment of my personal website.
+## Key Features
 
-While the repository might be hosted on GitHub, its nature is that of a private, personal project.
+- **Data-Driven Architecture**: UI content is decoupled from the structure via `js/config.js`, allowing for seamless content updates.
+- **Glassmorphism Design**: High-fidelity interface utilizing blurred transparencies and smooth gradients.
+- **Responsive & Mobile-First**: Fully optimized for various screen sizes, featuring a custom glass-overlay mobile navigation.
+- **Interactive Showcase**: Dynamic portfolio tracking with filtering, pagination, and detailed project modals.
+- **Automated Service Workflow**: Integrated ToS acceptance module with Firestore logging and PDF service contract generation.
+- **Micro-interactions**: Typing effects, intersection-observer counters, and infinite marquee tracks for an engaging user experience.
 
-## 🚀 Viewing the Live Portfolio
+## Project Structure
 
-You can view the live version of my portfolio website at:
-**`https://ansdev.site/`**
+```text
+ansdev/
+├── assets/             # Images, icons, and downloadable documents
+├── css/                # Modular stylesheets (base, components, home, etc.)
+├── js/
+│   ├── config.js       # Centralized content and data management
+│   └── app.js          # Main application logic and UI interactions
+├── index.html          # Main landing page
+└── projects.html       # Full project gallery and archives
+```
 
-_Please remember that this link is provided for viewing my professional profile. The underlying code and assets are subject to the license terms outlined below and in the `LICENSE` file._
+## Live Deployment
 
----
+The live version of this portfolio can be accessed at:
+**[ansdev.site](https://ansdev.site/)**
 
-## ⚖️ License
+## License & Intellectual Property
 
-The entirety of this project, including all source code (HTML, CSS, JavaScript), images, assets, and textual content, is **Copyright (©) 2025 Muhammad Andriansyah (AnS_Dev). All Rights Reserved.**
+Copyright © 2026 Muhammad Andriansyah (AnS_Dev). All Rights Reserved.
 
-This is a **private, proprietary project**. Access to this repository or its live deployment does **not** grant any rights to use, copy, modify, distribute, or create derivative works from this project, in whole or in part, without my express prior written consent.
+This is a **private and proprietary** project. The source code, assets, and design systems are not licensed for public use, redistribution, or modification. Any unauthorized reproduction or use of this codebase without express written permission is strictly prohibited.
 
-**Please refer to the `LICENSE` file in the root of this repository for detailed terms and conditions.**
+## Contact Information
 
-Unauthorized use, reproduction, or distribution of this project, or any part thereof, is strictly prohibited and may result in legal action.
+I am available for professional inquiries and collaboration opportunities.
 
----
-
-## 📬 Get in Touch
-
-I'm always open to discussing new projects, collaboration opportunities, or any questions you might have regarding my work.
-
-*   **Email:** `mhmd.andriansyah07@gmail.com`
-*   **LinkedIn:** `https://linkedin.com/in/mhmdandriansyh`
-*   **Roblox:** `https://www.roblox.com/users/677682595/profile`
-*   **Discord:** `ID: 693102105950683179`
-
-Thank you for taking the time to review my portfolio project!
+- **Email**: mhmd.andriansyah07@gmail.com
+- **LinkedIn**: [mhmdandriansyh](https://linkedin.com/in/mhmdandriansyh)
+- **Roblox**: [@AnS_Dev](https://www.roblox.com/users/677682595/profile)
+- **Discord**: `ans_dev` (ID: 693102105950683179)

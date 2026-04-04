@@ -1,57 +1,48 @@
-# Project License: Personal Portfolio Website
+# Proprietary License: AnS_Dev Portfolio Project
 
-**Copyright (©) 2025 Muhammad Andriansyah (AnS_Dev)**
+**Copyright © 2026 Muhammad Andriansyah (AnS_Dev). All Rights Reserved.**
 
-All Rights Reserved.
+## 1. Ownership & Intellectual Property
 
-## Preamble
+This website, including all source code, design assets, graphical elements, database schemas, and textual content (collectively referred to as the "Software"), is the exclusive private property of **Muhammad Andriansyah (AnS_Dev)**. 
 
-This document outlines the terms and conditions under which access to and use of this personal portfolio website project (hereinafter referred to as the "Software") is permitted. This Software is the proprietary work of Muhammad Andriansyah (also known as AnS_Dev).
+No part of this Software is open-source. Access to this repository or the live deployment of the website does not grant, convey, or imply any license, rights, or permissions to the user or any third party.
 
-## Definition of Software
+## 2. Strict Prohibitions
 
-For the purposes of this License, "Software" encompasses, but is not limited to:
+Unless expressly authorized in writing by Muhammad Andriansyah, you are strictly prohibited from:
 
-1.  All **HTML structure and content** (e.g., `index.html`).
-2.  All **CSS stylesheets** (e.g., `style.css`), including layout, typography, color schemes, and responsive design implementations.
-3.  All **JavaScript code** (e.g., `scripts/main.js`), including functionality for navigation, theme toggling, dynamic content (like the typed text effect, portfolio filters), form handling, and any other client-side logic.
-4.  All **images and graphical assets** used throughout the website, including but not limited to:
-    *   Favicon (`images/fav-icon.jpg`)
-    *   Hero image (`images/hero-img.jpg`)
-    *   About Me image (`images/about-img.jpg`)
-    *   Project showcase images (e.g., `images/projects/rohangan.png`, `images/projects/the-monox.png`, etc.)
-    *   Any other icons or visual elements.
-5.  All **textual content**, including personal introductions, project descriptions, service details, skills listings, and contact information.
-6.  The **overall design, look and feel, and user interface (UI) / user experience (UX)** of the website.
-7.  Any **downloadable files** provided through the website, such as the Curriculum Vitae (CV) (e.g., `files/MUHAMMAD ANDRIANSYAH (ATS CV).pdf`).
-8.  The specific **Roblox project details, descriptions, and statistics** presented, as they form part of the portfolio content.
+- **Usage**: Deploying, hosting, or running this Software or any of its components for personal, commercial, or educational purposes.
+- **Storage**: Saving, archiving, or mirrors of the source code or assets on any local or cloud-based storage system.
+- **Distribution**: Sharing, leaking, or distributing the Software, in whole or in part, via any medium (e.g., GitHub, Discord, marketplaces).
+- **Modification**: Altering, adapting, or creating derivative works based on the logic, design, or structure of this project.
+- **Commercialization**: Selling, licensing, or profiting from the Software or any elements derived from it.
+- **Reverse Engineering**: Decompiling or attempting to extract the underlying logic or proprietary systems.
 
-## Conditions of Use
+## 3. Scope of Protection
 
-This Software is private and proprietary. Access to this Software, whether through its source code repository or its live deployed version, is granted on a limited basis and does not imply any transfer of ownership or intellectual property rights.
+This license applies to all files within this directory and its subdirectories, including but not limited to:
+- **HTML/JS/CSS**: The entire frontend architecture and dynamic logic.
+- **Design System**: The specific implementation of glassmorphism, gradients, and UI/UX flows.
+- **Media Assets**: All portfolio images, icons, and branding elements.
+- **Database Logic**: Configurations and integration methods for Firebase/Firestore services.
+- **Documents**: Technical resumes, project briefs, and service contracts.
 
-You, as an individual or entity with authorized access (if any), or as a visitor to the live website, are **NOT PERMITTED** to:
+## 4. Legal Enforcement
 
-1.  **Reproduce, copy, mirror, or distribute** the Software, in whole or in part (including any of the defined components above), to any third party or for any public or commercial purpose without prior written consent from Muhammad Andriansyah (AnS_Dev).
-2.  **Modify, adapt, translate, reverse engineer, decompile, disassemble, or create derivative works** based on the Software or any of its components without prior written consent from Muhammad Andriansyah (AnS_Dev). This includes, but is not limited to, using the design, structure, or specific code segments for other projects.
-3.  **Use any part of the Software for any commercial purposes** or in any manner that is not expressly authorized in writing by Muhammad Andriansyah (AnS_Dev).
-4.  **Remove, alter, or obscure any copyright, trademark, or other proprietary notices** contained in or on the Software, its source files, or its live deployment.
-5.  **Sublicense, lease, rent, or lend** the Software or any of its components to any third party.
-6.  **Replicate the portfolio structure, content, or specific project showcases** for your own or another individual's portfolio without express permission.
+Unauthorized use, reproduction, or distribution of this Software is a violation of intellectual property laws and international copyright treaties. Any breach of these terms will be met with immediate legal action, including but not limited to:
+- DMCA Takedown notices against hosting providers and associated platforms.
+- Formal reports to developer communities and blacklisting.
+- Legal proceedings for damages and unauthorized use of proprietary property.
 
-## No Warranty
+## 5. Contact & Inquiries
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL MUHAMMAD ANDRIANSYAH (AnS_DEV) BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+For professional inquiries or to request explicit permission for a specific use case, please contact:
 
-## Governing Law
-
-Any unauthorized use of this Software may result in legal action. These terms are governed by the laws of `Indonesia`.
-
-## Contact
-
-For any inquiries regarding the use of this Software, including requests for permission for specific uses, please contact Muhammad Andriansyah (AnS_Dev) at:
-`mhmd.andriansyah07@gmail.com`
+**Muhammad Andriansyah (AnS_Dev)**
+- **Email**: mhmd.andriansyah07@gmail.com
+- **Discord**: `ans_dev`
 
 ---
 
-*This license is specifically for the personal portfolio website of Muhammad Andriansyah (AnS_Dev) as detailed above. It underscores the private, proprietary, and non-open-source nature of this specific project. No open-source rights or permissions for re-use are granted by this license.*
+*This document serves as a final and binding notice of the proprietary nature of this project. If you are in possession of a copy of this Software without authorization, you are required to delete it immediately.*
