@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (filtersContainer) {
       // Dynamic Genre Extraction from Project Data
       const uniqueGenres = ["All", ...new Set(pData.projects.map(p => p.genre))];
-      
+
       uniqueGenres.forEach((filter) => {
         const btn = document.createElement('button');
         btn.className = 'filter-btn' + (filter === "All" ? ' active' : '');
@@ -362,8 +362,6 @@ document.addEventListener('DOMContentLoaded', () => {
         tagsContainer.appendChild(tSpan);
       });
 
-      document.getElementById('modal-desc').textContent = proj.description;
-
       const contribul = document.getElementById('modal-contributions');
       contribul.innerHTML = '';
       proj.contributions.forEach(c => {
@@ -373,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       document.getElementById('modal-link').href = proj.link;
-      
+
       // Populate Stats (Visits, Likes, Favorites)
       const statsContainer = document.getElementById('modal-stats');
       if (statsContainer) {
@@ -955,7 +953,7 @@ document.addEventListener('DOMContentLoaded', () => {
       y += 10;
       doc.setFontSize(11);
       doc.setFont("helvetica", "normal");
-      doc.text(`Developer: AnS_Dev`, margin, y);
+      doc.text(`Developer: ${CONFIG.profile.name}`, margin, y);
       y += 7;
       doc.text(`Client Name: ${data.signature}`, margin, y);
       y += 7;
@@ -986,7 +984,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       y += 10;
       doc.setFont("courier", "italic");
-      doc.text("AnS_Dev", margin + 10, y);
+      doc.text(CONFIG.profile.name, margin + 10, y);
       doc.text(data.signature, 110 + 10, y);
 
       y += 10;
@@ -1387,7 +1385,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const originalBtnText = submitBtn.innerHTML;
         submitBtn.innerHTML = '<span>Sending...</span> <i class="fas fa-spinner fa-spin"></i>';
         submitBtn.disabled = true;
-        statusMsg.style.display = 'none';
         statusMsg.className = 'form-status';
 
         const formData = new FormData(contactForm);
