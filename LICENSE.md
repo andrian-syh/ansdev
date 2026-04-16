@@ -22,11 +22,11 @@ Unless expressly authorized in writing by Muhammad Andriansyah, you are strictly
 ## 3. Scope of Protection
 
 This license applies to all files within this directory and its subdirectories, including but not limited to:
-- **HTML/JS/CSS**: The entire frontend architecture and dynamic logic.
-- **Design System**: The specific implementation of glassmorphism, gradients, and UI/UX flows.
-- **Media Assets**: All portfolio images, icons, and branding elements.
-- **Database Logic**: Configurations and integration methods for Firebase/Firestore services.
-- **Documents**: Technical resumes, project briefs, and service contracts.
+- **HTML/JS/CSS**: The entire frontend architecture, including the segmented modular JavaScript files (`core.js`, `portfolio.js`, etc.) and dynamic logic.
+- **Design System**: The specific implementation of glassmorphism, gradients, CSS variables, and UI/UX responsive flows.
+- **Media Assets**: All portfolio images, icons, visual branding elements, and metadata tags configurations.
+- **Database Logic**: Configurations, architectural methodology, and integration scripts for Firebase/Firestore services.
+- **Documents**: Technical resumes, project briefs, and the automated PDF generation logic for service contracts (`jsPDF` templates).
 
 ## 4. Legal Enforcement
 

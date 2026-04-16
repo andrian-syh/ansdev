@@ -28,12 +28,13 @@ The primary objectives of this project are:
 
 ## Key Features
 
-- **Data-Driven Architecture**: UI content is decoupled from the structure via `js/config.js`, allowing for seamless content updates.
+- **Modular Web Architecture**: Deeply optimized loading efficiency with specialized scripts (`core.js`, `portfolio.js`, etc.), drastically accelerating secondary page loads.
+- **Data-Driven Core**: UI content is decoupled from the structure via `js/config.js`, allowing for seamless content updates.
 - **Glassmorphism Design**: High-fidelity interface utilizing blurred transparencies and smooth gradients.
 - **Responsive & Mobile-First**: Fully optimized for various screen sizes, featuring a custom glass-overlay mobile navigation.
 - **Interactive Showcase**: Dynamic portfolio tracking with filtering, pagination, and detailed project modals.
-- **Automated Service Workflow**: Integrated ToS acceptance module with Firestore logging and PDF service contract generation.
-- **Micro-interactions**: Typing effects, intersection-observer counters, and infinite marquee tracks for an engaging user experience.
+- **Automated Service Workflow**: Integrated ToS acceptance module with Firestore logging and PDF service contract generation (`jsPDF`).
+- **Rich Embed Metadata**: Implements Open Graph and Twitter Cards for premium previews when sharing links via Discord, WhatsApp, or Twitter.
 
 ## Project Structure
 
@@ -42,8 +43,13 @@ ansdev/
 ├── assets/             # Images, icons, and downloadable documents
 ├── css/                # Modular stylesheets (base, components, home, etc.)
 ├── js/
-│   ├── config.js       # Centralized content and data management
-│   └── app.js          # Main application logic and UI interactions
+│   ├── config.js       # Centralized content configuration and data management
+│   ├── core.js         # Core UI interactions, scroll spy, and counters
+│   ├── portfolio.js    # Dynamic project grid, filtering, and project modals
+│   ├── testimonials.js # Client review rendering and pagination logic
+│   ├── services.js     # Rate card pricing logic and dynamic currency
+│   ├── info-modal.js   # Split-panel modals, ToS acceptance, Firebase logging
+│   └── contact.js      # Premium contact form and reCAPTCHA implementations
 ├── index.html          # Main landing page
 └── projects.html       # Full project gallery and archives
 ```
