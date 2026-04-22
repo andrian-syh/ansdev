@@ -212,11 +212,31 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ============================================
-  // ACTIVE NAV SPY (Scroll Tracker)
+  // ACTIVE NAV SPY
   // ============================================
   const sections = document.querySelectorAll('section[id]');
   // Exclusively target internal anchor links mapping to sections
   const hashLinks = document.querySelectorAll('.nav-links a[href^="#"], .mobile-nav-item[href^="#"]');
+  const allHashLinks = document.querySelectorAll('a[href^="#"]');
+
+  // Prevent URL hash update and scroll smoothly
+  allHashLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+
+        // Remove hash from URL if it's currently present
+        if (window.location.hash) {
+          history.replaceState(null, null, window.location.pathname + window.location.search);
+        }
+      }
+    });
+  });
 
   if (sections.length > 0 && hashLinks.length > 0) {
     const observerOptions = {
