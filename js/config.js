@@ -50,7 +50,7 @@ const CONFIG = {
         visits: "1.6M+",
         likes: "2.7K+",
         favorites: "5.5K+",
-        duration: "Jul 2025 — Present",
+        duration: "Jul 2025 — Apr 2026",
         image: "assets/images/projects/pulau-indo.webp",
         tags: ["Voice Chat", "Hangout"],
         link: "https://www.roblox.com/games/116271475876333",
@@ -138,6 +138,26 @@ const CONFIG = {
           "Programmed a scalable pet rarity and randomized spawning system.",
           "Integrated comprehensive progression systems including rebirths, shops, and dynamic events.",
           "Scripted interactive troll tools and engagement mechanics, such as the synchronized slap system."
+        ]
+      },
+      {
+        id: "tarkam-soccer-arena",
+        title: "[BETA] Tarkam Soccer Arena",
+        genre: "Sports",
+        visits: "1K+",
+        likes: "10",
+        favorites: "22",
+        duration: "Apr 2026 — Present",
+        image: "assets/images/projects/tarkam-soccer-arena.webp",
+        tags: ["Football", "Tarkam", "Multiplayer"],
+        link: "https://www.roblox.com/games/94628658837954",
+        description: "An action-packed Roblox soccer game featuring custom physics, strategic stamina & combo systems, and explosive Ultimate abilities for a highly competitive multiplayer experience.",
+        contributions: [
+          "Engineered a robust multiplayer matchmaking system to ensure seamless and balanced competitive game sessions.",
+          "Architected responsive front-end UI/UX architectures, tightly integrating them with complex back-end logic.",
+          "Developed a scalable, probability-based Gacha system with dynamic drop rates and inventory management.",
+          "Integrated secure In-App Purchases (IAP) handling and reliable monetization mechanics.",
+          "Programmed engaging progression and retention systems, including daily/weekly missions and real-time quiz events."
         ]
       },
       {
